@@ -27,12 +27,21 @@
 #rightIcon{
   margin-left: 3px;
 }
+#slopeMap{
+  float: left;
+  padding-bottom: 20px;
+}
 .mapsIcons{
   margin-top: 10px;
 }
-#modal1{
+/*#modal1{
   width: 1100px;
   height: 2000px;
+}*/
+.modal{
+  width: 90%;
+  height: 90%;
+  overflow-y: hidden;
 }
 
 .menu{
