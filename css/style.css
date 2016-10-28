@@ -13,6 +13,34 @@
   padding-right: 20px;
   float: left;
 }
+#avyImg{
+  height: 54px;
+}
+#mapImg{
+  height: 50px;
+  padding-top: 6px;
+}
+#flakeImg{
+  height: 50px;
+  padding-top: 4px;
+}
+#rightIcon{
+  margin-left: 3px;
+}
+.mapsIcons{
+  margin-top: 10px;
+}
+
+.menu{
+  margin: 0px 20px 280px 20px;
+}
+.hatIcon{
+  float: right;
+}
+
+/*#finalParallax{
+  max-height: 300px;
+}*/
 nav ul a,
 nav .brand-logo {
   color: #444;
