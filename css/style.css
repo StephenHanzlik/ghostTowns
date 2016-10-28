@@ -30,6 +30,10 @@
 .mapsIcons{
   margin-top: 10px;
 }
+#modal1{
+  width: 1100px;
+  height: 2000px;
+}
 
 .menu{
   margin: 0px 20px 280px 20px;
