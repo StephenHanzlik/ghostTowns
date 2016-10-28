@@ -88,13 +88,33 @@
         <div class="row center">
           <!-- icons  -->
             <a class="btn-floating btn-large waves-effect waves-light teal lighten-1 tooltipped mapsIcons modal-trigger" data-position="bottom" data-delay="50" data-tooltip="Avalanche Forcast" href="#modal1"><img id="avyImg" src="avalanche.png"></a>
-            <a class="btn-floating btn-large waves-effect waves-light teal lighten-1 tooltipped mapsIcons"  data-position="bottom" data-delay="50" data-tooltip="Slope Angle Maps"><img
-            id="mapImg" src="map.png"></a>
+
             <a class="btn-floating btn-large waves-effect waves-light teal lighten-1 tooltipped mapsIcons" id="rightIcon"  data-position="bottom" data-delay="50" data-tooltip="SNOTEL Maps"><img src="snowFlake.png" id="flakeImg"></a>
+            
+            <a class="btn-floating btn-large waves-effect waves-light teal lighten-1 tooltipped mapsIcons modal-trigger"  data-position="bottom" data-delay="50" data-tooltip="Slope Angle Maps" href="#modal2"><img
+            id="mapImg" src="map.png"></a>
+
 
           <!-- modals -->
 
           <div id="modal1" class="modal">
+              <div class="modal-content">
+                  <iframe name="caic_fx_map" id="caic_fx_map"
+                        src="http://avalanche.state.co.us/caic/fx_map.php"
+                        width="495px" height="565px"
+                        scrolling="no" marginwidth="0"
+                        marginheight="0" frameborder="0"
+                        vspace="0" hspace="0">
+                      <p>Your browser does not support iframes.</p>
+                  </iframe>
+                  <p>Slope angle overlay on map Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in </p>
+              </div>
+            <div class="modal-footer">
+              <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+            </div>
+          </div>
+
+          <div id="modal2" class="modal">
               <div class="modal-content">
                   <iframe id="slopeMap" src='http://www.hillmap.com/embed/ag1zfmhpbGxtYXAtaGRychULEghTYXZlZE1hcBiAgICI1ZuxCww' style='height: 600px; width: 600px;'></iframe>
                   <p>Slope angle overlay on map Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in </p>

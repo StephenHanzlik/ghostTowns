@@ -31,6 +31,9 @@
   float: left;
   padding-bottom: 20px;
 }
+#caic_fx_map{
+  float: left;
+}
 .mapsIcons{
   margin-top: 10px;
 }
