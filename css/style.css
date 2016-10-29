@@ -17,9 +17,9 @@
 #avyImg{
   height: 54px;
 }
-#mapImg{
+#angleImg{
   height: 50px;
-  padding-top: 6px;
+  padding-bottom: 5px;
 }
 #flakeImg{
   height: 50px;
@@ -50,7 +50,17 @@
   color: red;
   font-weight: 900;
 }
-
+.flakeNav{
+  height: 59px;
+  margin-bottom: -24px;
+}
+.angleNav {
+  height: 59px;
+  margin-bottom: -24px;
+}
+.avyNav{
+  height: 62px;
+}
 .menu{
   margin: 0px 20px 280px 20px;
 }
