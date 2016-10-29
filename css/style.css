@@ -8,6 +8,7 @@
 #subHead {
   margin-bottom: -10px;
 }
+
 #backPack {
   margin-right: 30px;
   padding-right: 20px;
@@ -28,8 +29,7 @@
   margin-left: 3px;
 }
 #slopeMap{
-  float: left;
-  padding-bottom: 20px;
+  float: right;
 }
 #caic_fx_map{
   float: left;
@@ -45,6 +45,10 @@
   width: 90%;
   height: 90%;
   overflow-y: hidden;
+}
+.avyWarning{
+  color: red;
+  font-weight: 900;
 }
 
 .menu{
@@ -75,7 +79,7 @@ p {
 }
 
 .parallax-container {
-  min-height: 630px;
+  min-height: 700px;
   line-height: 0;
   height: auto;
   color: rgba(255,255,255,.9);
