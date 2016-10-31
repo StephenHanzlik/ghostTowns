@@ -14,25 +14,31 @@
   padding-right: 20px;
   float: left;
 }
-#avyImg{
+.avyImg{
   height: 54px;
 }
-#angleImg{
-  height: 50px;
-  padding-bottom: 5px;
+.angleImg{
+  height: 45px;
+  padding-top: 7px;
 }
-#flakeImg{
-  height: 50px;
+.placeImg{
+  height: 46px;
   padding-top: 4px;
 }
-#rightIcon{
+.rightIcon{
   margin-left: 3px;
 }
 #slopeMap{
   float: right;
+  margin-top: 40px;
 }
 #caic_fx_map{
   float: left;
+  margin-top: 40px;
+}
+#myChart {
+  width: 400px;
+  height: 400px;
 }
 .mapsIcons{
   margin-top: 10px;
@@ -50,22 +56,31 @@
   color: red;
   font-weight: 900;
 }
-.flakeNav{
-  height: 59px;
+.placeNav{
+  height: 54px;
+  padding-bottom: 5px;
   margin-bottom: -24px;
 }
-.angleNav {
-  height: 59px;
+.mapNav {
+  height: 52px;
   margin-bottom: -24px;
+  padding-bottom: 5px;
 }
 .avyNav{
   height: 62px;
+  margin-bottom: -24px;
+}
+.goggsNav{
+  margin-left: 13px;
 }
 .menu{
   margin: 0px 20px 280px 20px;
 }
 .hatIcon{
   float: right;
+}
+.shrinkZones{
+  height: 7px;
 }
 
 /*#finalParallax{
@@ -86,6 +101,16 @@ p {
 
 .button-collapse {
   color: #26a69a;
+}
+.indexStats{
+  color: black;
+}
+
+.indexFlexBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .parallax-container {

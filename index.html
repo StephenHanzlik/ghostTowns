@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-  <title>GHOST TOWNS</title>
+  <title>SUNSHINE DAYDREAM</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -75,9 +75,9 @@
       <div class="row">
         <div class="col s12 m4">
           <div class="icon-block">
-            <h2 class="center brown-text"><i class="fa fa-area-chart" aria-hidden="true"></i></h2>
+            <a href="avyDash.html"><h2 class="center brown-text">  <a class="btn-floating btn-large waves-effect waves-light teal lighten-1 mapsIcons" href="avyDash.html"><img class="avyImg" src="avalanche.png"></a></h2></a>
 
-            <h5 class="center">SNOTEL Dashboard</h5>
+            <h5 class="center">CAIC Forecast</h5>
 
             <p class="light">Get in depth statitacl analysis from SNOTEL weather stations.   are available on command. Find which stations are reporting the most snow and which ones are under bluebird skys.</p>
           </div>
@@ -85,8 +85,8 @@
 
         <div class="col s12 m4">
           <div class="icon-block">
-            <h2 class="center brown-text"><i class="fa fa-map" aria-hidden="true"></i></h2>
-            <h5 class="center">Google Maps Plugin</h5>
+            <h2 class="center brown-text"><a class="btn-floating btn-large waves-effect waves-light teal lighten-1 mapsIcons rightIcon" href="snotelDash.html"><img src="placeholder.png" class="placeImg"></a></h2>
+            <h5 class="center">SNOTEL Dashboard</h5>
 
             <p class="light">Maps display eveything from slope angles about 35% to snowtel stations and radar.  Topographical maps make it simple to plan the next adventure.</p>
           </div>
@@ -94,8 +94,9 @@
 
         <div class="col s12 m4">
           <div class="icon-block">
-            <h2 class="center brown-text"><i class="fa fa-tree" aria-hidden="true"></i></h2>
-            <h5 class="center">Save favorites</h5>
+            <h2 class="center brown-text"><a class="btn-floating btn-large waves-effect waves-light teal lighten-1 mapsIcons" href="slopeDash.html"><img
+            class="angleImg" src="folded-map.png"></a></h2>
+            <h5 class="center">Slope Angle Maps</h5>
 
             <p class="light">We have provided detailed documentation as well as specific code examples to help new </p>
           </div>
@@ -108,44 +109,6 @@
 
   <div class="parallax-container">
       <!-- <div class="container"> -->
-        <div class="row center">
-          <!-- icons  -->
-            <a class="btn-floating btn-large waves-effect waves-light teal lighten-1 tooltipped mapsIcons modal-trigger" data-position="bottom" data-delay="50" data-tooltip="Avalanche Forcast" href="#modal1"><img id="avyImg" src="avalanche.png"></a>
-
-            <a class="btn-floating btn-large waves-effect waves-light teal lighten-1 tooltipped mapsIcons" id="rightIcon"  data-position="bottom" data-delay="50" data-tooltip="SNOTEL Maps"><img src="snowFlake.png" id="flakeImg"></a>
-
-            <a class="btn-floating btn-large waves-effect waves-light teal lighten-1 tooltipped mapsIcons modal-trigger"  data-position="bottom" data-delay="50" data-tooltip="Slope Angle Maps" href="#modal2"><img
-            id="angleImg" src="angle.png"></a>
-
-          <!-- modals -->
-
-          <!-- <div id="modal1" class="modal">
-              <div class="modal-content">
-                  <iframe name="caic_fx_map" id="caic_fx_map"
-                        src="http://avalanche.state.co.us/caic/fx_map.php"
-                        width="495px" height="565px"
-                        scrolling="no" marginwidth="0"
-                        marginheight="0" frameborder="0"
-                        vspace="0" hspace="0">
-                      <p>Your browser does not support iframes.</p>
-                  </iframe>
-                  <p>Slope angle overlay on map Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in </p>
-              </div>
-            <div class="modal-footer">
-              <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-            </div>
-          </div> -->
-
-          <!-- <div id="modal2" class="modal">
-              <div class="modal-content">
-                  <iframe id="slopeMap" src='http://www.hillmap.com/embed/ag1zfmhpbGxtYXAtaGRychULEghTYXZlZE1hcBiAgICI1ZuxCww' style='height: 600px; width: 600px;'></iframe>
-                  <p>Slope angle overlay on map Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in </p>
-              </div>
-            <div class="modal-footer">
-              <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-            </div>
-          </div> -->
-        </div>
         <div class="row">
           <div class="col s4">
             <iframe name="caic_fx_map" id="caic_fx_map"
@@ -157,14 +120,31 @@
                 <p>Your browser does not support iframes.</p>
             </iframe>
           </div>
-          <div class="col s4">
+<!-- these will ideally render in order of most snow to least -->
+          <div class="col s4 indexFlexBox">
+              <h4 class="indexStats">Eldora</h4>
+              <h4 class="indexStats">7"</h4>
+              <h4 class="indexStats">Berthoud Pass</h4>
+              <h4 class="indexStats">5"</h4>
+              <h4 class="indexStats">Winter Park</h4>
+              <h4 class="indexStats">3"</h4>
+              <h4 class="indexStats">Eldora</h4>
+              <h4 class="indexStats">2"</h4>
           </div>
           <div class="col s4">
                 <iframe id="slopeMap" src='http://www.hillmap.com/embed/ag1zfmhpbGxtYXAtaGRychULEghTYXZlZE1hcBiAgICI1ZvxCgw' frameborder="0" style='height: 555px; width: 495px;'></iframe>
           </div>
         </div>
+        <div class="row center">
+          <!-- icons  -->
+          <a class="btn-floating btn-large waves-effect waves-light teal lighten-1 tooltipped mapsIcons" data-position="top" data-delay="50" data-tooltip="CAIC Forecast" href="avyDash.html"><img class="avyImg" src="avalanche.png"></a>
 
-      <!-- </div> -->
+          <a class="btn-floating btn-large waves-effect waves-light teal lighten-1 tooltipped mapsIcons rightIcon"  data-position="top" data-delay="50" data-tooltip="SNOTEL Dashboard" href="snotelDash.html"><img src="placeholder.png" class="placeImg"></a>
+
+          <a class="btn-floating btn-large waves-effect waves-light teal lighten-1 tooltipped mapsIcons"  data-position="top" data-delay="50" data-tooltip="Slope Angle Map" href="slopeDash.html"><img
+            class="angleImg" src="folded-map.png"></a>
+          </div>
+
     <div class="parallax"><img src="rsz_maps.jpg" alt="Unsplashed background img 2"></div>
   </div>
 
@@ -199,34 +179,33 @@
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
-          <h5 class="white-text">Ghost Towns</h5>
-          <p class="grey-text text-lighten-4">This guide exists purely for personal demontrational purposes.   It was inspired by, and complied with, information from the published book  "Powder Ghost Towns" by Peter Bronski.</p>
+          <h5 class="white-text">Sunshine Daydream</h5>
+          <p class="grey-text text-lighten-4">This dashboard exists for personal informational purposes.   It is inteded to serve as a tool to provide indepth, multifacited information regarding the current weather conditions and snowpack. Hopefully this information will lead to informed and safe travel decisions in the winter backcountry.</p>
 
 
         </div>
         <div class="col l3 s12">
-          <h5 class="white-text">Settings</h5>
+          <h5 class="white-text">Guides</h5>
           <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
+            <li><a class="white-text" href="https://skimap.org/">Vintage Resort Maps</a></li>
+            <li><a class="white-text" href="http://www.frontrangeskimo.com/">Front Range Ski </a></li>
+            <li><a class="white-text" href="https://www.powderproject.com/">Powder Project</a></li>
           </ul>
         </div>
         <div class="col l3 s12">
-          <h5 class="white-text">Connect</h5>
+          <h5 class="white-text">Conditions</h5>
           <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
+            <li><a class="white-text" href="https://opensnow.com/">Open Snow</a></li>
+            <li><a class="white-text" href="http://www.onthesnow.com/">On the Snow</a></li>
+            <li><a class="white-text" href="http://avalanche.state.co.us/">CAIC</a></li>
           </ul>
         </div>
       </div>
     </div>
     <div class="footer-copyright">
       <div class="container">
-      Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Gnarls von Powderborne</a>
+      Gnarls von Powderborne  <a class="brown-text text-lighten-3" href="https://www.linkedin.com/in/stephen-hanzlik-14b71b122
+">Stephen Hanzlik</a>
       </div>
     </div>
   </footer>
