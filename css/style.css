@@ -82,7 +82,15 @@
 .shrinkZones{
   height: 7px;
 }
+.temp{
 
+}
+.snowDepth{
+
+}
+.mapParallax{
+  opacity: 0.3; 
+}
 /*#finalParallax{
   max-height: 300px;
 }*/
@@ -140,7 +148,7 @@ p {
 }
 
 .icon-block {
-  padding: 0 15px;
+  padding: 0px;
 }
 .icon-block .material-icons {
   font-size: inherit;
