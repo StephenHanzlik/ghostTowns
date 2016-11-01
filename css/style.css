@@ -82,14 +82,14 @@
 .shrinkZones{
   height: 7px;
 }
-.temp{
-
+.graph{
+  height: 100px;
 }
 .snowDepth{
 
 }
 .mapParallax{
-  opacity: 0.3; 
+  opacity: 0.3;
 }
 /*#finalParallax{
   max-height: 300px;
