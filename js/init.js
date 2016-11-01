@@ -2,108 +2,13 @@
 (function($) {
     $(function() {
 
-        // $(function () {
-        //       Highcharts.chart('container', {
-        //           chart: {
-        //               type: 'line'
-        //           },
-        //           title: {
-        //               text: 'Anual Snow Pack'
-        //           },
-        //           subtitle: {
-        //               text: 'Powderline API'
-        //           },
-        //           xAxis: {
-        //               categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        //           },
-        //           yAxis: {
-        //               title: {
-        //                   text: 'Inches'
-        //               }
-        //           },
-        //           plotOptions: {
-        //               line: {
-        //                   dataLabels: {
-        //                       enabled: true
-        //                   },
-        //                   enableMouseTracking: true
-        //               }
-        //           },
-        //           series: [{
-        //               name: 'Tokyo',
-        //               data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-        //           }, {
-        //               name: 'London',
-        //               data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-        //           }]
-        //       });
-        //   });
-        //JSON graph
-        // $(document).ready(function () {
-        //   var snotelData = {
-        //     labels: ["Jan", "Feb", "March", "April", "May"],
-        //     datasets: [
-        //       {
-        //         fillColor: "rgba(172,194,132,0.4)",
-        //         strokeColor : "#ACC26D",
-        //         pointColor : "#fff",
-        //         pointStrokeColor : "#9DB86D",
-        //         data : [2003,1005,99000,2005,3000,2004]
-        //       }
-        //     ]
-        //   };
-        //   var chart = document.getElementById('myChart').getContext('2d');
-        //   new Chart(chart).Line(snotelData);
-        //
-        // })
-
-
-        //
-        //   var ctx = $("#myChart");
-        //   //   Chart.defaults.global = {
-        //   //     scaleOverride: true,
-        //   //     scaleSteps: 5,
-        //   //     scaleStepWidth: 12,
-        //   //    scaleStartValue: 30,
-        //   //  };
-        //     var myChart = new Chart(ctx, {
-        //     type: 'line',
-        //     data: {
-        //         labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        //         datasets: [
-        //       {
-        //         label: "My First dataset",
-        //         fillColor: "rgba(220,220,220,0.2)",
-        //         strokeColor: "rgba(220,220,220,1)",
-        //         pointColor: "rgba(220,220,220,1)",
-        //         pointStrokeColor: "#fff",
-        //         pointHighlightFill: "#fff",
-        //         pointHighlightStroke: "rgba(220,220,220,1)",
-        //         data: [65, 59, 80, 81, 56, 55, 40]
-        //       }],
-        //     },
-        //     options: {
-        //         scales: {
-        //             yAxes: [{
-        //                 ticks: {
-        //                     beginAtZero:true
-        //                 }
-        //             }]
-        //         }
-        //     }
-        // });
-        // Chart.defaults.global = {
-        //   scaleOverride: true,
-        //   scaleSteps: 5,
-        //   scaleStepWidth: 12,
-        //   scaleStartValue: 30,
-        // };
-
 
         //Collapsable collection script
-        $(document).ready(function() {
-            $('.collapsible').collapsible();
-        });
+        $('.collapsible').collapsible();
+
+        //Drop down options tabs
+        $('select').material_select();
+
 
         //materialize scripts
         $('.button-collapse').sideNav();
@@ -114,10 +19,6 @@
         // avalanche red danger icon
         $('.fixed-action-btn').openFAB();
 
-        // Date entry script
-        // $('.datepicker').pickadate({
-        //     selectMonths: true, // Creates a dropdown to control month
-        //     selectYears: 15 // Creates a dropdown of 15 years to control year
     });
     // Hamburger in nav
     $(".button-collapse").sideNav();
@@ -196,12 +97,32 @@
 
 
         //plot monthly snowpack depth to array for graph graphing
+        var $stationSearch = $(".statSearch");
+        var $select = $('#select');
+        var $station2Val = $(".statSearch2").val();
+        var $station3Val = $(".statSearch3").val();
+        var searchVal = 0;
+        $stationSearch.on("click", function () {
+          event.preventDefault();
+          searchVal = $select.val();
+
+ //
+ // });
+
+
+
+        // $stationSearch.on('click', function(){
+        // $(this).attr('action',$(this).attr('action')+$('#agent').val());
+        // $(this).submit();
+        // });
+
+
         var monthlySnow = [];
         var dates = [];
-        var $xhr = $.getJSON('https://g-powderlines.herokuapp.com/station/322:CO:SNTL?days=365');
+        var $xhr = $.getJSON('https://g-powderlines.herokuapp.com/station/' + searchVal +':CO:SNTL?days=365');
         $xhr.done(function(data) {
             if ($xhr.status === 200 || $xhr.status === undefined) {
-                console.log(data);
+              //push snow pack depth at monthly intervals
                 monthlySnow.push(data.data[29]["Snow Depth (in)"] + '"');
                 dates.push(data.data[29].Date);
                 monthlySnow.push(data.data[60]["Snow Depth (in)"] + '"');
@@ -227,6 +148,11 @@
                 monthlySnow.push(data.data[365]["Snow Depth (in)"] + '"');
                 dates.push(data.data[365].Date);
 
+              //push temperature at 5x monthly intervals
+
+
+
+              //convert monthly snow fall strings to number format
                 var newSnow = [];
                 var numArr = [];
                 for (var i = 0; i < monthlySnow.length; i++) {
@@ -280,6 +206,7 @@
                 return;
             }
         });
+    });
         //
         // $(function () {
         //       Highcharts.chart('container', {

@@ -48,23 +48,28 @@
     </div>
 
     <div class="row">
-        <div class="col s12 m7">
-            <div class="card" id="activate">
-                <div class="card-image">
-                    <img src="images/sample-1.jpg">
-                    <span class="card-title">Card Title</span>
-                </div>
-                <div class="card-content">
-                    <div class="container">
-                        <div id="container" style="min-width: 200px; height: 300px;  width: 800px; margin: 0 auto"></div>
-                    </div>
-                </div>
-                <div class="card-action">
-                    <a href="#" >This is a link</a>
-                </div>
-            </div>
+        <div class="container col s6">
+            <div id="container" style="min-width: 200px; height: 300px;  width: 800px; margin: 0 auto"></div>
         </div>
     </div>
+    <div class="row">
+        <div class="input-field col s6">
+          <form>
+            <select id="select" name="select">
+                <option value="" disabled selected>SNOTEL Sites</option>
+                <option class="statSearch1" value="322">Eldora</option>
+                <option class="statSearchx" value="870">RMNP</option>
+                <option value="3">Berthoud Pass</option>
+            </select>
+            <label>Choose Locations</label>
+            <button class="btn waves-effect waves-light statSearch" type="submit" name="action">Submit
+                  <i class="material-icons right">send</i>
+                </button>
+          </form>
+        </div>
+    </div>
+
+
     <footer class="page-footer teal">
         <div class="container">
             <div class="row">
