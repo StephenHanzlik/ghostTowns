@@ -223,9 +223,9 @@
             event.preventDefault();
             searchVal = $select.val();
 
-
             //collect snow pack observations from the end of the month
             var monthlySnow = [];
+            var monthlyTemp = [];
             var dates = [];
 
 
@@ -258,6 +258,8 @@
                     // dates.push(data.data[334].Date);
                     // monthlySnow.push(data.data[365]["Snow Depth (in)"] + '"');
 
+                    //Get snow fall data for month
+
                     //convert monthly snow fall strings to number format
                     var newSnow = [];
                     var numArr = [];
@@ -283,26 +285,99 @@
                     // }
 
                     //or grab all the years data and put them in seperate arrays every 30 days
-                    // var yearsTemp = [];
-                    // for (var j = 0; j < 365; j++) {
-                    //     yearsTemp.push(data.data[j]["Air Temperature Observed (degF)"]);
-                    // }
-                    // var nov15 = yearsTemp.splice(0, 28);
-                    // var dec15 = yearsTemp.splice(29, 59);
-                    // var jan16 = yearsTemp.splice(60, 90);
-                    // var feb16 = yearsTemp.splice(91, 119);
-                    // var mar16 = yearsTemp.splice(120, 150);
-                    // var apr16 = yearsTemp.splice(151, 180);
-                    // var may16 = yearsTemp.splice(181, 211);
-                    // var jun16 = yearsTemp.splice(212, 241);
-                    // var jul16 = yearsTemp.splice(242, 272);
-                    // var aug16 = yearsTemp.splice(273, 303);
-                    // var sept16 = yearsTemp.splice(304, 333);
-                    // var 16 = yearsTemp.splice(334, 364);
-                    // // for (var y = 0; y < 360; 30++) {
-                    // //   array[y]
-                    // // }
-                    // console.log("******"+yearsTemp);
+                    var yearsTemp = [];
+                    var yearsTempNum = [];
+
+                    for (var j = 0; j < 365; j++) {
+                        yearsTemp.push(data.data[j]["Air Temperature Observed (degF)"]);
+                        yearsTempNum.push(parseInt(yearsTemp[j], 10));
+                    }
+                    var nov15 = [];
+                    nov15.push(yearsTempNum.splice(28, 28));
+                    var dec15 = [];
+                    dec15.push(yearsTempNum.splice(0, 30));
+                    var jan16 = [];
+                    jan16.push(yearsTempNum.splice(0, 30));
+                    var feb16 = [];
+                    feb16.push(yearsTempNum.splice(0, 28));
+                    var mar16 = [];
+                    mar16.push(yearsTempNum.splice(0, 30));
+                    var apr16 = [];
+                    apr16.push(yearsTempNum.splice(0, 29));
+                    var may16 = [];
+                    may16.push(yearsTempNum.splice(0, 30));
+                    var jun16 = [];
+                    jun16.push(yearsTempNum.splice(0, 29));
+                    var jul16 = [];
+                    jul16.push(yearsTempNum.splice(0, 30));
+                    var aug16 = [];
+                    aug16.push(yearsTempNum.splice(0, 30));
+                    var sept16 = [];
+                    sept16.push(yearsTempNum.splice(0, 29));
+                    var oct16 = [];
+                    oct16.push(yearsTempNum.splice(0, 30));
+                    console.log("oct 16: ");
+                    console.log(oct16);
+                    //add and average the arrays:
+                    var nov15Sum = 0;
+                    var dec15Sum = 0
+                    var jan16Sum = 0;
+                    var feb16Sum = 0;
+                    var mar16Sum = 0;
+                    var apr16Sum = 0;
+                    var may16Sum = 0;
+                    var jun16Sum = 0;
+                    var jul16Sum = 0;
+                    var aug16Sum = 0;
+                    var sept16Sum = 0;
+                    var oct16Sum = 0;
+
+                    for (var y = 0; y < 28; y++) {
+                         nov15Sum += nov15[0][y];
+                         dec15Sum += dec15[0][y];
+                         jan16Sum += jan16[0][y];
+                         feb16Sum += feb16[0][y];
+                         mar16Sum += mar16[0][y];
+                         apr16Sum += apr16[0][y];
+                         may16Sum += may16[0][y];
+                         jun16Sum += jun16[0][y];
+                         jul16Sum += jul16[0][y];
+                         aug16Sum += aug16[0][y];
+                         sept16Sum += sept16[0][y];
+                         oct16Sum += oct16[0][y];
+
+                    }
+
+                        var nov15Avrg = nov15Sum / 29;
+                        var dec15SumAvrg = dec15Sum / 29;
+                        var jan16SumAvrg = jan16Sum / 29;
+                        var feb16SumAvrg = feb16Sum / 29;
+                        var mar16SumAvrg = mar16Sum / 29;
+                        var apr16SumAvrg = apr16Sum/ 29;
+                        var may16SumAvrg = may16Sum /29;
+                        var jun16SumAvrg = jun16Sum / 29;
+                        var jul16SumAvrg = jul16Sum / 29;
+                        var aug16SumAvrg = aug16Sum/ 29;
+                        var sept16SumAvrg = sept16Sum/ 29;
+                        var oct16SumAvrg = oct16Sum/ 29;
+                        console.log("averageTempArr:");
+                        console.log(averageTempArr);
+
+                        var averageTempArr = [];
+                        averageTempArr.push(Math.round(jan16SumAvrg));
+                        averageTempArr.push(Math.round(feb16SumAvrg));
+                        averageTempArr.push(Math.round(mar16SumAvrg));
+                        averageTempArr.push(Math.round(apr16SumAvrg));
+                        averageTempArr.push(Math.round(may16SumAvrg));
+                        averageTempArr.push(Math.round(jun16SumAvrg));
+                        averageTempArr.push(Math.round(jul16SumAvrg));
+                        averageTempArr.push(Math.round(aug16SumAvrg));
+                        averageTempArr.push(Math.round(sept16SumAvrg));
+                        averageTempArr.push(Math.round(oct16SumAvrg));
+                        console.log("averageTempArr:");
+                        console.log(averageTempArr);
+
+                        averageTempArr
 
                     //push temperature at 5x monthly intervals
 
@@ -340,7 +415,7 @@
                             data: numArr,
                         }, {
                             name: 'Average Temperature',
-                            data: []
+                            data: averageTempArr
                         }]
                     };
                     Highcharts.chart('container', chartData);
@@ -351,82 +426,5 @@
                 }
             });
         });
-        //
-        // $(function () {
-        //       Highcharts.chart('container', {
-        //           chart: {
-        //               type: 'line'
-        //           },
-        //           title: {
-        //               text: 'Anual Snow Pack'
-        //           },
-        //           subtitle: {
-        //               text: 'Powderline API'
-        //           },
-        //           xAxis: {
-        //               categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        //           },
-        //           yAxis: {
-        //               title: {
-        //                   text: 'Inches'
-        //               }
-        //           },
-        //           plotOptions: {
-        //               line: {
-        //                   dataLabels: {
-        //                       enabled: true
-        //                   },
-        //                   enableMouseTracking: true
-        //               }
-        //           },
-        //           series: [{
-        //               name: 'Tokyo',
-        //               data: monthlySnow,
-        //           }, {
-        //               name: 'London',
-        //               data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-        //           }]
-        //       });
-        //     console.log(chart);
-        //   });
-
-
-        // $indexStats.append(data.station_information.name);
-
-
-        //This is for Dark Sky's API to get forecast data on main page:
-        //     var $xhr = $.getJSON('https://api.darksky.net/forecast/1208083a5de6f5223add7d7ea23141da/39.938172,-105.586681');
-        //     $xhr.done(function(data) {
-        //         if ($xhr.status === 200 || $xhr.status === undefined) {
-        //           console.log(data);
-        //         } else {
-        //             return;
-        //         }
-        //     });
-        // });
-
-        //AJAX to powderline API to append CAIC Zone averages
-        // $(document).ready(function() {
-        //     var $xhr = $.getJSON('https://g-powderlines.herokuapp.com/station/335:CO:SNTL');
-        //     $xhr.done(function(data) {
-        //         if ($xhr.status === 200 || $xhr.status === undefined) {
-        //           console.log(data);
-        //         } else {
-        //             return;
-        //         }
-        //     });
-        //   });
-
-
-
-
-
-
-
-        //  data.data[0]["Air Temperature Observed (degF)"]);
-        //  data.station_information.name
-        //
-
-
     }); // end of document ready
 })(jQuery); // end of jQuery name space
