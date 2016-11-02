@@ -91,6 +91,15 @@
 .mapParallax{
   opacity: 0.3;
 }
+.graphCenter{
+  display: flex;
+
+}
+.mapCont{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 /*#finalParallax{
   max-height: 300px;
 }*/
@@ -113,13 +122,19 @@ p {
 .indexStats{
   color: black;
 }
+.flexIndexCards{
+  margin-top: 80px;
+}
+.indexIcons{
+  margin-top: 70px;
+}
 
-.indexFlexBox{
+/*.indexFlexBox{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+}*/
 
 .parallax-container {
   min-height: 700px;
