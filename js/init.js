@@ -2,7 +2,6 @@
 (function($) {
     $(function() {
 
-
         //Collapsable collection script
         $('.collapsible').collapsible();
 
@@ -13,8 +12,8 @@
         //materialize scripts
         $('.button-collapse').sideNav();
         $('.parallax').parallax();
-        // $('#modal1').openModal();
-        $('.modal-trigger').leanModal();
+
+
 
         // avalanche red danger icon
         $('.fixed-action-btn').openFAB();
