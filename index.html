@@ -13,6 +13,7 @@
     <script src="https://use.fontawesome.com/c638b1f4f4.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
 </head>
 
 <body>
@@ -51,22 +52,10 @@
 
     <!--  Danger icon make active only w/ more than 6 inches of snow -->
 
-    <div class="fixed-action-btn horizontal" style="bottom: 15px; right: 15px;">
+    <div class="fixed-action-btn horizontal" id="newSnow" style="bottom: 15px; right: 15px; display: none">
         <a class="btn-floating btn-large red">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
         </a>
-        <ul class="avyWarning">
-            <li>A</li>
-            <li>V</li>
-            <li>Y</li>
-            <li>-</li>
-            <li>D</li>
-            <li>A</li>
-            <li>N</li>
-            <li>G</li>
-            <li>E</li>
-            <li>R</li>
-        </ul>
     </div>
 
 
@@ -84,7 +73,7 @@
 
                         <h5 class="center">CAIC Forecast</h5>
 
-                        <p class="light">Combine the CAIC zone forecasts with SNOTEL weather station zone averages.  Find which zones have recieved the most snow lately and compare them to avalanche forecasts</p>
+                        <p class="light">Combine the CAIC zone forecasts with SNOTEL weather stations.  Find which areas have recieved the most snow lately and compare them to avalanche forecasts</p>
                     </div>
                 </div>
 
@@ -249,8 +238,7 @@
             <div class="row">
                 <div class="col l6 s12">
                     <h5 class="white-text">Sunshine Daydream</h5>
-                    <p class="grey-text text-lighten-4">This dashboard exists for personal informational purposes. It is inteded to serve as a tool to provide indepth, multifacited information regarding the current weather conditions and snowpack. Hopefully this information will lead to
-                        informed and safe travel decisions in the winter backcountry.</p>
+                    <p class="grey-text text-lighten-4">This dashboard exists for personal informational purposes. It is inteded as a tool to provide indepth information regarding the current weather conditions and snowpack.</p>
 
 
                 </div>

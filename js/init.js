@@ -38,11 +38,13 @@
     var $snowDepth4 = $('.snowDepth4');
     var $temp4 = $('.temp4');
 
+
     $(document).ready(function() {
         //Manipulate DOM on index page
-        var $xhr = $.getJSON('https://g-powderlines.herokuapp.com/station/564:CO:SNTL');
-        $xhr.done(function(data) {
-            if ($xhr.status === 200 || $xhr.status === undefined) {
+
+        var $xhr0 = $.getJSON('https://g-powderlines.herokuapp.com/station/663:CO:SNTL');
+        $xhr0.done(function(data) {
+            if ($xhr0.status === 200 || $xhr0.status === undefined) {
                 $snow1.empty();
                 $snow1.append(data.station_information.name);
                 $temp1.empty();
@@ -66,7 +68,7 @@
                 return;
             }
         });
-        var $xhr2 = $.getJSON('https://g-powderlines.herokuapp.com/station/322:CO:SNTL');
+        var $xhr2 = $.getJSON('https://g-powderlines.herokuapp.com/station/415:CO:SNTL');
         $xhr2.done(function(data) {
             if ($xhr2.status === 200 || $xhr2.status === undefined) {
                 $snow3.empty();
@@ -75,6 +77,8 @@
                 $temp3.append(data.data[5]["Air Temperature Observed (degF)"] + "°F");
                 $snowDepth3.empty();
                 $snowDepth3.append(data.data[5]["Change In Snow Depth (in)"] + '"');
+                console.log("JSON data:");
+                console.log(data);
             } else {
                 return;
             }
@@ -93,55 +97,15 @@
             }
         });
 
-      //Average 5x stations from each zone an render to CAIC page
-          //front range stations
-        var $avrgFrontRange = $('avrgFrontRange');
-        var avrgFrontRangeArr = [];
-
-        var $frontAJAX = $.getJSON('https://g-powderlines.herokuapp.com/station/322:CO:SNTL');
-        $frontAJAX.done(function(data) {
-            if ($frontAJAX.status === 200 || $frontAJAX.status === undefined) {
-                avrgFrontRangeArr.push(data.data[5]["Change In Snow Depth (in)"]);
-            } else {
-                return;
-            }
-        });
-        var $frontAJAX = $.getJSON('https://g-powderlines.herokuapp.com/station/1042:CO:SNTL');
-        $frontAJAX.done(function(data) {
-            if ($frontAJAX.status === 200 || $frontAJAX.status === undefined) {
-                avrgFrontRangeArr.push(data.data[5]["Change In Snow Depth (in)"]);
-            } else {
-                return;
-            }
-        });
-        var $frontAJAX = $.getJSON('https://g-powderlines.herokuapp.com/station/415:CO:SNTL');
-        $frontAJAX.done(function(data) {
-            if ($frontAJAX.status === 200 || $frontAJAX.status === undefined) {
-                avrgFrontRangeArr.push(data.data[5]["Change In Snow Depth (in)"]);
-            } else {
-                return;
-            }
-        });
-
-        //this converts string array to numbers but is not working :
-        console.log(avrgFrontRangeArr);
-        var fRangeNumArr = [];
-        for (var c = 0; c < avrgFrontRangeArr.length; c++) {
-            fRangeNumArr.push(parseInt(avrgFrontRangeArr[c], 10));
-            // if (!isNaN(parseInt(avrgFrontRangeArr[c], 10))) {
-            //     fRangeNumArr.push(parseInt(avrgFrontRangeArr[c], 10));
-            // } else {
-            //   fRangeNumArr.push(0);
-            // }
-        }
-        console.log(fRangeNumArr);
-
 
         //plot 24 hour snow to bar graph
 
         var allRequests = [];
 
-        allRequests.push($.getJSON('https://g-powderlines.herokuapp.com/station/564:CO:SNTL'));
+        // This is the logic to control the warning button
+
+
+        allRequests.push($.getJSON('https://g-powderlines.herokuapp.com/station/663:CO:SNTL'));
 
 
         allRequests.push($.getJSON('https://g-powderlines.herokuapp.com/station/335:CO:SNTL'));
@@ -159,7 +123,7 @@
           }
 
           var dailySnowArr = [];
-          dailySnowArr[0] = dailySnowObj["LAKE ELDORA"][5]["Change In Snow Depth (in)"];
+          dailySnowArr[0] = dailySnowObj.NIWOT[5]["Change In Snow Depth (in)"];
           dailySnowArr[1] = dailySnowObj["COPPER MOUNTAIN"][5]["Change In Snow Depth (in)"];
           dailySnowArr[2] = dailySnowObj["BERTHOUD SUMMIT"][5]["Change In Snow Depth (in)"];
           dailySnowArr[3] = dailySnowObj["WILD BASIN"][5]["Change In Snow Depth (in)"];
@@ -171,10 +135,16 @@
               }
           }
 
-          console.log(dailySnowNumArr);
+          var $newSnow = $('#newSnow');
+          if($newSnow[0]) {
+            for (var b = 0; b < dailySnowNumArr.length; b++){
+              if(dailySnowNumArr[b] >= 1){
+                $newSnow[0].style.display = "block";
+                break;
+              }
+            }
+          }
 
-          // var dailySnowArr = Object.keys(dailySnowObj).map(function (key) { return dailySnowObj[key]; });
-          // console.log(dailySnowArr);
 
           var chartData2 = {
             chart: {
@@ -209,7 +179,6 @@
           };
           Highcharts.chart('container2', chartData2);
 
-
         });
 
 
@@ -230,7 +199,7 @@
 
 
 
-            var $xhr = $.getJSON('https://g-powderlines.herokuapp.com/station/' + searchVal + ':CO:SNTL?days=365');
+            var $xhr = $.getJSON('https://g-powderlines.herokuapp.com/station/' + searchVal + ':CO:SNTL?days=395');
             $xhr.done(function(data) {
                 if ($xhr.status === 200 || $xhr.status === undefined) {
                     //push snow pack depth at monthly intervals
@@ -255,8 +224,8 @@
                     monthlySnow.push(data.data[304]["Snow Depth (in)"] + '"');
                     dates.push(data.data[304].Date);
                     monthlySnow.push(data.data[334]["Snow Depth (in)"] + '"');
-                    // dates.push(data.data[334].Date);
-                    // monthlySnow.push(data.data[365]["Snow Depth (in)"] + '"');
+                    dates.push(data.data[334].Date);
+                    monthlySnow.push(data.data[365]["Snow Depth (in)"] + '"');
 
                     //Get snow fall data for month
 
@@ -270,57 +239,80 @@
                         }
                     }
 
-                    //push temperature at 3x a month interval
-                    // x3Temp.push(data.data[3]["Air Temperature Observed (degF)"]);
-                    // x3Temp.push(data.data[16]["Air Temperature Observed (degF)"]);
-                    // x3Temp.push(data.data[26]["Air Temperature Observed (degF)"]);
-                    // // conver 3x a month observations to numbers for graphing
-                    // var newTemp = [];
-                    // var tempNumArr = [];
-                    // for (var i = 0; i < x3Temp.length; i++) {
-                    //     newTemp.push(x3Temp[i]);
-                    //     if (!isNaN(parseInt(newTemp[i], 10))) {
-                    //         tempNumArr.push(parseInt(newTemp[i], 10));
-                    //     }
-                    // }
 
                     //or grab all the years data and put them in seperate arrays every 30 days
                     var yearsTemp = [];
                     var yearsTempNum = [];
 
-                    for (var j = 0; j < 365; j++) {
+                    for (var j = 0; j < 395; j++) {
                         yearsTemp.push(data.data[j]["Air Temperature Observed (degF)"]);
                         yearsTempNum.push(parseInt(yearsTemp[j], 10));
                     }
+
+
+               //  use isNAN() to parse and correct the arrays that have NAN
                     var nov15 = [];
-                    nov15.push(yearsTempNum.splice(28, 28));
+                    nov15.push(yearsTempNum.splice(30, 30));
                     var dec15 = [];
-                    dec15.push(yearsTempNum.splice(0, 30));
+                    dec15.push(yearsTempNum.splice(0, 31));
                     var jan16 = [];
-                    jan16.push(yearsTempNum.splice(0, 30));
+                    jan16.push(yearsTempNum.splice(0, 31));
                     var feb16 = [];
-                    feb16.push(yearsTempNum.splice(0, 28));
+                    feb16.push(yearsTempNum.splice(0, 29));
                     var mar16 = [];
-                    mar16.push(yearsTempNum.splice(0, 30));
+                    mar16.push(yearsTempNum.splice(0, 31));
                     var apr16 = [];
                     apr16.push(yearsTempNum.splice(0, 29));
                     var may16 = [];
-                    may16.push(yearsTempNum.splice(0, 30));
+                    may16.push(yearsTempNum.splice(0, 31));
                     var jun16 = [];
-                    jun16.push(yearsTempNum.splice(0, 29));
+                    jun16.push(yearsTempNum.splice(0, 30));
                     var jul16 = [];
-                    jul16.push(yearsTempNum.splice(0, 30));
+                    jul16.push(yearsTempNum.splice(0, 31));
                     var aug16 = [];
-                    aug16.push(yearsTempNum.splice(0, 30));
+                    aug16.push(yearsTempNum.splice(0, 31));
                     var sept16 = [];
-                    sept16.push(yearsTempNum.splice(0, 29));
+                    sept16.push(yearsTempNum.splice(0, 30));
                     var oct16 = [];
-                    oct16.push(yearsTempNum.splice(0, 30));
-                    console.log("oct 16: ");
-                    console.log(oct16);
+                    oct16.push(yearsTempNum.splice(0, 31));
+                    var nov16 = [];
+                    nov16.push(yearsTempNum.splice(0, 5));
+                    //
+                    console.log("nov16[0]: ");
+                    console.log(nov16[0]);
+
+
+
+                    //need to remove all NaN from array
+                    var removeNaN = function (monthTempArr) {
+                      for (var t = 0; t < monthTempArr.length; t++) {
+                            if(isNaN(monthTempArr[t])){
+                               monthTempArr.splice(t, 1);
+                            }
+                      }
+                      return monthTempArr;
+                    };
+
+                    removeNaN(nov15[0]);
+                    removeNaN(dec15[0]);
+                    removeNaN(jan16[0]);
+                    removeNaN(feb16[0]);
+                    removeNaN(mar16[0]);
+                    removeNaN(apr16[0]);
+                    removeNaN(may16[0]);
+                    removeNaN(jun16[0]);
+                    removeNaN(jul16[0]);
+                    removeNaN(aug16[0]);
+                    removeNaN(sept16[0]);
+                    removeNaN(oct16[0]);
+                    removeNaN(nov16[0]);
+                    // console.log("dec15[0] after removeNaN(): ");
+                    // console.log(dec15[0]);
+
+
                     //add and average the arrays:
                     var nov15Sum = 0;
-                    var dec15Sum = 0
+                    var dec15Sum = 0;
                     var jan16Sum = 0;
                     var feb16Sum = 0;
                     var mar16Sum = 0;
@@ -331,6 +323,7 @@
                     var aug16Sum = 0;
                     var sept16Sum = 0;
                     var oct16Sum = 0;
+                    var nov16Sum = 0;
 
                     for (var y = 0; y < 28; y++) {
                          nov15Sum += nov15[0][y];
@@ -345,25 +338,33 @@
                          aug16Sum += aug16[0][y];
                          sept16Sum += sept16[0][y];
                          oct16Sum += oct16[0][y];
-
+                        //  nov16Sum += nov16[0][y];
                     }
+                    for (var r = 0; r < nov16[0].length; r++) {
+                          nov16Sum += nov16[0][r];
+                    }
+                    // console.log("dec15[0].length: ");
+                    // console.log(dec15[0].length);
 
-                        var nov15Avrg = nov15Sum / 29;
-                        var dec15SumAvrg = dec15Sum / 29;
-                        var jan16SumAvrg = jan16Sum / 29;
-                        var feb16SumAvrg = feb16Sum / 29;
-                        var mar16SumAvrg = mar16Sum / 29;
-                        var apr16SumAvrg = apr16Sum/ 29;
-                        var may16SumAvrg = may16Sum /29;
-                        var jun16SumAvrg = jun16Sum / 29;
-                        var jul16SumAvrg = jul16Sum / 29;
-                        var aug16SumAvrg = aug16Sum/ 29;
-                        var sept16SumAvrg = sept16Sum/ 29;
-                        var oct16SumAvrg = oct16Sum/ 29;
-                        console.log("averageTempArr:");
-                        console.log(averageTempArr);
+                        var nov15SumAvrg = nov15Sum / nov15[0].length;
+                        var dec15SumAvrg = dec15Sum / dec15[0].length;
+                        var jan16SumAvrg = jan16Sum / jan16[0].length;
+                        var feb16SumAvrg = feb16Sum / feb16[0].length;
+                        var mar16SumAvrg = mar16Sum / mar16[0].length;
+                        var apr16SumAvrg = apr16Sum/ apr16[0].length;
+                        var may16SumAvrg = may16Sum / may16[0].length;
+                        var jun16SumAvrg = jun16Sum / jun16[0].length;
+                        var jul16SumAvrg = jul16Sum / jul16[0].length;
+                        var aug16SumAvrg = aug16Sum/ aug16[0].length;
+                        var sept16SumAvrg = sept16Sum/ sept16[0].length;
+                        var oct16SumAvrg = oct16Sum/ oct16[0].length;
+                        var nov16SumAvrg = nov16Sum/ nov16[0].length;
+                        console.log("nov16SumAvrg:");
+                        console.log(nov16SumAvrg);
 
                         var averageTempArr = [];
+                        // averageTempArr.push(Math.round(nov15SumAvrg));
+                        averageTempArr.push(Math.round(dec15SumAvrg));
                         averageTempArr.push(Math.round(jan16SumAvrg));
                         averageTempArr.push(Math.round(feb16SumAvrg));
                         averageTempArr.push(Math.round(mar16SumAvrg));
@@ -374,10 +375,10 @@
                         averageTempArr.push(Math.round(aug16SumAvrg));
                         averageTempArr.push(Math.round(sept16SumAvrg));
                         averageTempArr.push(Math.round(oct16SumAvrg));
+                        averageTempArr.push(Math.round(nov16SumAvrg));
                         console.log("averageTempArr:");
                         console.log(averageTempArr);
 
-                        averageTempArr
 
                     //push temperature at 5x monthly intervals
 
@@ -395,7 +396,7 @@
                             text: 'Powderline API'
                         },
                         xAxis: {
-                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov']
+                            categories: ['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov']
                         },
                         yAxis: {
                             title: {
