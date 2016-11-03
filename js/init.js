@@ -39,6 +39,8 @@
 
 
     $(document).ready(function() {
+
+
         //Manipulate DOM on index page
 
         var $xhr0 = $.getJSON('https://g-powderlines.herokuapp.com/station/663:CO:SNTL');
@@ -76,8 +78,6 @@
                 $temp3.append(data.data[5]["Air Temperature Observed (degF)"] + "°F");
                 $snowDepth3.empty();
                 $snowDepth3.append(data.data[5]["Change In Snow Depth (in)"] + '"');
-                console.log("JSON data:");
-                console.log(data);
             } else {
                 return;
             }
@@ -95,6 +95,154 @@
                 return;
             }
         });
+
+        //grab information for avy dashboard page
+        var $avFR = $('.avFR');
+        var $avSB = $('.avSB');
+        var $avVail = $('.avVail');
+        var $avMon = $('.avMon');
+        var $avAsp = $('.avAsp');
+        var $avCB = $('.avCB');
+        var $avSDC = $('.avSDC');
+        var $avTel = $('.avTel');
+
+        var $xhrFR = $.getJSON('https://g-powderlines.herokuapp.com/station/663:CO:SNTL');
+        $xhrFR.done(function(data) {
+            if ($xhrFR.status === 200 || $xhrFR.status === undefined) {
+                $avFR.empty();
+                if (data.data[5] === undefined) {
+                    if (data.data[4]["Change In Snow Depth (in)"] === null) {
+                        $avFR.append('No Report');
+                    } else {
+                        $avFR.append(data.data[4]["Change In Snow Depth (in)"] + '"*');
+                    }
+                } else {
+                    $avFR.append(data.data[5]["Change In Snow Depth (in)"] + '"');
+                }
+            } else {
+                return;
+            }
+        });
+        var $xhrSB = $.getJSON('https://g-powderlines.herokuapp.com/station/709:CO:SNTL');
+        $xhrSB.done(function(data) {
+            if ($xhrSB.status === 200 || $xhrSB.status === undefined) {
+                $avSB.empty();
+                if (data.data[5] === undefined) {
+                    if (data.data[4]["Change In Snow Depth (in)"] === null) {
+                        $avSB.append('No Report');
+                    } else {
+                        $avSB.append(data.data[4]["Change In Snow Depth (in)"] + '"*');
+                    }
+                } else {
+                    $avSB.append(data.data[5]["Change In Snow Depth (in)"] + '"');
+                }
+            } else {
+                return;
+            }
+        });
+        var $xhrVail = $.getJSON('https://g-powderlines.herokuapp.com/station/842:CO:SNTL');
+        $xhrVail.done(function(data) {
+            if ($xhrVail.status === 200 || $xhrVail.status === undefined) {
+                $avVail.empty();
+                if (data.data[5] === undefined) {
+                    if (data.data[4]["Change In Snow Depth (in)"] === null) {
+                        $avVail.append('No Report');
+                    } else {
+                        $avVail.append(data.data[4]["Change In Snow Depth (in)"] + '"*');
+                    }
+                } else {
+                    $avVail.append(data.data[5]["Change In Snow Depth (in)"] + '"');
+                }
+            } else {
+                return;
+            }
+        });
+        var $xhrMon = $.getJSON('https://g-powderlines.herokuapp.com/station/701:CO:SNTL');
+        $xhrMon.done(function(data) {
+            if ($xhrMon.status === 200 || $xhrMon.status === undefined) {
+                $avMon.empty();
+                if (data.data[5] === undefined) {
+                    if (data.data[4]["Change In Snow Depth (in)"] === null) {
+                        $avMon.append('No Report');
+                    } else {
+                        $avMon.append(data.data[4]["Change In Snow Depth (in)"] + '"*');
+                    }
+                } else {
+                    $avMon.append(data.data[5]["Change In Snow Depth (in)"] + '"');
+                }
+            } else {
+                return;
+            }
+        });
+        var $xhrAsp = $.getJSON('https://g-powderlines.herokuapp.com/station/542:CO:SNTL');
+        $xhrAsp.done(function(data) {
+            if ($xhrAsp.status === 200 || $xhrAsp.status === undefined) {
+                $avAsp.empty();
+                if (data.data[5] === undefined) {
+                    if (data.data[4]["Change In Snow Depth (in)"] === null) {
+                        $avAsp.append('No Report');
+                    } else {
+                        $avAsp.append(data.data[4]["Change In Snow Depth (in)"] + '"*');
+                    }
+                } else {
+                    $avAsp.append(data.data[5]["Change In Snow Depth (in)"] + '"');
+                }
+            } else {
+                return;
+            }
+        });
+        var $xhrCB = $.getJSON('https://g-powderlines.herokuapp.com/station/380:CO:SNTL');
+        $xhrCB.done(function(data) {
+            if ($xhrCB.status === 200 || $xhrCB.status === undefined) {
+                $avCB.empty();
+                if (data.data[5] === undefined) {
+                    if (data.data[4]["Change In Snow Depth (in)"] === null) {
+                        $avCB.append('No Report');
+                    } else {
+                        $avCB.append(data.data[4]["Change In Snow Depth (in)"] + '"*');
+                    }
+                } else {
+                    $avCB.append(data.data[5]["Change In Snow Depth (in)"] + '"');
+                }
+            } else {
+                return;
+            }
+        });
+        var $xhrSDC = $.getJSON('https://g-powderlines.herokuapp.com/station/773:CO:SNTL');
+        $xhrSDC.done(function(data) {
+            if ($xhrSDC.status === 200 || $xhrSDC.status === undefined) {
+                $avSDC.empty();
+                if (data.data[5] === undefined) {
+                    if (data.data[4]["Change In Snow Depth (in)"] === null) {
+                        $avSDC.append('no data avail');
+                    } else {
+                        $avSDC.append(data.data[4]["Change In Snow Depth (in)"] + '"*');
+                    }
+                } else {
+                    $avSDC.append(data.data[5]["Change In Snow Depth (in)"] + '"');
+                }
+            } else {
+                return;
+            }
+        });
+        var $xhrTel = $.getJSON('https://g-powderlines.herokuapp.com/station/586:CO:SNTL');
+        $xhrTel.done(function(data) {
+            if ($xhrTel.status === 200 || $xhrTel.status === undefined) {
+                $avTel.empty();
+                if (data.data[5] === undefined) {
+                    if (data.data[4]["Change In Snow Depth (in)"] === null) {
+                        $avTel.append('No Report');
+                    } else {
+                        $avTel.append(data.data[4]["Change In Snow Depth (in)"] + '"*');
+                    }
+                } else {
+                    $avTel.append(data.data[5]["Change In Snow Depth (in)"] + '"');
+                }
+            } else {
+                return;
+            }
+        });
+
 
 
         //plot 24 hour snow to bar graph
@@ -115,68 +263,70 @@
         allRequests.push($.getJSON('https://g-powderlines.herokuapp.com/station/1042:CO:SNTL'));
 
 
-        Promise.all(allRequests).then(function (results) {
-          var dailySnowObj = {};
-          for (var i = 0; i < results.length; i++) {
-            dailySnowObj[results[i].station_information.name] = results[i].data;
-          }
-
-          var dailySnowArr = [];
-          dailySnowArr[0] = dailySnowObj.NIWOT[5]["Change In Snow Depth (in)"];
-          dailySnowArr[1] = dailySnowObj["COPPER MOUNTAIN"][5]["Change In Snow Depth (in)"];
-          dailySnowArr[2] = dailySnowObj["BERTHOUD SUMMIT"][5]["Change In Snow Depth (in)"];
-          dailySnowArr[3] = dailySnowObj["WILD BASIN"][5]["Change In Snow Depth (in)"];
-
-          var dailySnowNumArr = [];
-          for (var c = 0; c < dailySnowArr.length; c++) {
-              if (!isNaN(parseInt(dailySnowArr[c], 10))) {
-                  dailySnowNumArr.push(parseInt(dailySnowArr[c], 10));
-              }
-          }
-
-          var $newSnow = $('#newSnow');
-          if($newSnow[0]) {
-            for (var b = 0; b < dailySnowNumArr.length; b++){
-              if(dailySnowNumArr[b] >= 1){
-                $newSnow[0].style.display = "block";
-                break;
-              }
+        Promise.all(allRequests).then(function(results) {
+            var dailySnowObj = {};
+            for (var i = 0; i < results.length; i++) {
+                dailySnowObj[results[i].station_information.name] = results[i].data;
             }
-          }
+
+            var dailySnowArr = [];
+            dailySnowArr[0] = dailySnowObj.NIWOT[5]["Change In Snow Depth (in)"];
+            dailySnowArr[1] = dailySnowObj["COPPER MOUNTAIN"][5]["Change In Snow Depth (in)"];
+            dailySnowArr[2] = dailySnowObj["BERTHOUD SUMMIT"][5]["Change In Snow Depth (in)"];
+            dailySnowArr[3] = dailySnowObj["WILD BASIN"][5]["Change In Snow Depth (in)"];
+
+            var dailySnowNumArr = [];
+            for (var c = 0; c < dailySnowArr.length; c++) {
+                if (!isNaN(parseInt(dailySnowArr[c], 10))) {
+                    dailySnowNumArr.push(parseInt(dailySnowArr[c], 10));
+                }
+            }
+
+            // check daily snow for red button on index page
+
+            var $newSnow = $('#newSnow');
+            if ($newSnow[0]) {
+                for (var b = 0; b < dailySnowNumArr.length; b++) {
+                    if (dailySnowNumArr[b] >= 1) {
+                        $newSnow[0].style.display = "block";
+                        break;
+                    }
+                }
+            }
 
 
-          var chartData2 = {
-            chart: {
-              type: 'bar'
-            },
-            title: {
-              text: 'New Snow Report 24 Hours'
-            },
-            subtitle: {
-              text: 'Powderline API'
-            },
-            xAxis: {
-              categories: ['Eldora', 'Copper', 'Berthoud', 'RMNP']
-            },
-            yAxis: {
-              title: {
-                text: 'Inches'
-              }
-            },
-            plotOptions: {
-              line: {
-                dataLabels: {
-                  enabled: true
+            var chartData2 = {
+                chart: {
+                    type: 'bar'
                 },
-                enableMouseTracking: true
-              }
-            },
-            series: [{
-              name: 'Snow Pack Depth',
-              data: dailySnowNumArr
-            }]
-          };
-          Highcharts.chart('container2', chartData2);
+                title: {
+                    text: 'New Snow Report 24 Hours'
+                },
+                subtitle: {
+                    text: 'Powderline API'
+                },
+                xAxis: {
+                    categories: ['Eldora', 'Copper', 'Berthoud', 'RMNP']
+                },
+                yAxis: {
+                    title: {
+                        text: 'Inches'
+                    }
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: true
+                    }
+                },
+                series: [{
+                    name: 'Snow Pack Depth',
+                    data: dailySnowNumArr
+                }]
+            };
+            Highcharts.chart('container2', chartData2);
 
         });
 
@@ -249,7 +399,7 @@
                     }
 
 
-               //  use isNAN() to parse and correct the arrays that have NAN
+                    //  use isNAN() to parse and correct the arrays that have NAN
                     var nov15 = [];
                     nov15.push(yearsTempNum.splice(30, 30));
                     var dec15 = [];
@@ -276,20 +426,15 @@
                     oct16.push(yearsTempNum.splice(0, 31));
                     var nov16 = [];
                     nov16.push(yearsTempNum.splice(0, 5));
-                    //
-                    console.log("nov16[0]: ");
-                    console.log(nov16[0]);
-
-
 
                     //need to remove all NaN from array
-                    var removeNaN = function (monthTempArr) {
-                      for (var t = 0; t < monthTempArr.length; t++) {
-                            if(isNaN(monthTempArr[t])){
-                               monthTempArr.splice(t, 1);
+                    var removeNaN = function(monthTempArr) {
+                        for (var t = 0; t < monthTempArr.length; t++) {
+                            if (isNaN(monthTempArr[t])) {
+                                monthTempArr.splice(t, 1);
                             }
-                      }
-                      return monthTempArr;
+                        }
+                        return monthTempArr;
                     };
 
                     removeNaN(nov15[0]);
@@ -305,8 +450,6 @@
                     removeNaN(sept16[0]);
                     removeNaN(oct16[0]);
                     removeNaN(nov16[0]);
-                    // console.log("dec15[0] after removeNaN(): ");
-                    // console.log(dec15[0]);
 
 
                     //add and average the arrays:
@@ -325,62 +468,53 @@
                     var nov16Sum = 0;
 
                     for (var y = 0; y < 28; y++) {
-                         nov15Sum += nov15[0][y];
-                         dec15Sum += dec15[0][y];
-                         jan16Sum += jan16[0][y];
-                         feb16Sum += feb16[0][y];
-                         mar16Sum += mar16[0][y];
-                         apr16Sum += apr16[0][y];
-                         may16Sum += may16[0][y];
-                         jun16Sum += jun16[0][y];
-                         jul16Sum += jul16[0][y];
-                         aug16Sum += aug16[0][y];
-                         sept16Sum += sept16[0][y];
-                         oct16Sum += oct16[0][y];
+                        nov15Sum += nov15[0][y];
+                        dec15Sum += dec15[0][y];
+                        jan16Sum += jan16[0][y];
+                        feb16Sum += feb16[0][y];
+                        mar16Sum += mar16[0][y];
+                        apr16Sum += apr16[0][y];
+                        may16Sum += may16[0][y];
+                        jun16Sum += jun16[0][y];
+                        jul16Sum += jul16[0][y];
+                        aug16Sum += aug16[0][y];
+                        sept16Sum += sept16[0][y];
+                        oct16Sum += oct16[0][y];
                         //  nov16Sum += nov16[0][y];
                     }
                     for (var r = 0; r < nov16[0].length; r++) {
-                          nov16Sum += nov16[0][r];
+                        nov16Sum += nov16[0][r];
                     }
-                    // console.log("dec15[0].length: ");
-                    // console.log(dec15[0].length);
-
-                        var nov15SumAvrg = nov15Sum / nov15[0].length;
-                        var dec15SumAvrg = dec15Sum / dec15[0].length;
-                        var jan16SumAvrg = jan16Sum / jan16[0].length;
-                        var feb16SumAvrg = feb16Sum / feb16[0].length;
-                        var mar16SumAvrg = mar16Sum / mar16[0].length;
-                        var apr16SumAvrg = apr16Sum/ apr16[0].length;
-                        var may16SumAvrg = may16Sum / may16[0].length;
-                        var jun16SumAvrg = jun16Sum / jun16[0].length;
-                        var jul16SumAvrg = jul16Sum / jul16[0].length;
-                        var aug16SumAvrg = aug16Sum/ aug16[0].length;
-                        var sept16SumAvrg = sept16Sum/ sept16[0].length;
-                        var oct16SumAvrg = oct16Sum/ oct16[0].length;
-                        var nov16SumAvrg = nov16Sum/ nov16[0].length;
-                        console.log("nov16SumAvrg:");
-                        console.log(nov16SumAvrg);
-
-                        var averageTempArr = [];
-                        // averageTempArr.push(Math.round(nov15SumAvrg));
-                        averageTempArr.push(Math.round(dec15SumAvrg));
-                        averageTempArr.push(Math.round(jan16SumAvrg));
-                        averageTempArr.push(Math.round(feb16SumAvrg));
-                        averageTempArr.push(Math.round(mar16SumAvrg));
-                        averageTempArr.push(Math.round(apr16SumAvrg));
-                        averageTempArr.push(Math.round(may16SumAvrg));
-                        averageTempArr.push(Math.round(jun16SumAvrg));
-                        averageTempArr.push(Math.round(jul16SumAvrg));
-                        averageTempArr.push(Math.round(aug16SumAvrg));
-                        averageTempArr.push(Math.round(sept16SumAvrg));
-                        averageTempArr.push(Math.round(oct16SumAvrg));
-                        averageTempArr.push(Math.round(nov16SumAvrg));
-                        console.log("averageTempArr:");
-                        console.log(averageTempArr);
 
 
-                    //push temperature at 5x monthly intervals
+                    var nov15SumAvrg = nov15Sum / nov15[0].length;
+                    var dec15SumAvrg = dec15Sum / dec15[0].length;
+                    var jan16SumAvrg = jan16Sum / jan16[0].length;
+                    var feb16SumAvrg = feb16Sum / feb16[0].length;
+                    var mar16SumAvrg = mar16Sum / mar16[0].length;
+                    var apr16SumAvrg = apr16Sum / apr16[0].length;
+                    var may16SumAvrg = may16Sum / may16[0].length;
+                    var jun16SumAvrg = jun16Sum / jun16[0].length;
+                    var jul16SumAvrg = jul16Sum / jul16[0].length;
+                    var aug16SumAvrg = aug16Sum / aug16[0].length;
+                    var sept16SumAvrg = sept16Sum / sept16[0].length;
+                    var oct16SumAvrg = oct16Sum / oct16[0].length;
+                    var nov16SumAvrg = nov16Sum / nov16[0].length;
 
+                    var averageTempArr = [];
+                    // averageTempArr.push(Math.round(nov15SumAvrg));
+                    averageTempArr.push(Math.round(dec15SumAvrg));
+                    averageTempArr.push(Math.round(jan16SumAvrg));
+                    averageTempArr.push(Math.round(feb16SumAvrg));
+                    averageTempArr.push(Math.round(mar16SumAvrg));
+                    averageTempArr.push(Math.round(apr16SumAvrg));
+                    averageTempArr.push(Math.round(may16SumAvrg));
+                    averageTempArr.push(Math.round(jun16SumAvrg));
+                    averageTempArr.push(Math.round(jul16SumAvrg));
+                    averageTempArr.push(Math.round(aug16SumAvrg));
+                    averageTempArr.push(Math.round(sept16SumAvrg));
+                    averageTempArr.push(Math.round(oct16SumAvrg));
+                    averageTempArr.push(Math.round(nov16SumAvrg));
 
 
                     //annual snowfall chart
@@ -419,7 +553,6 @@
                         }]
                     };
                     Highcharts.chart('container', chartData);
-
 
                 } else {
                     return;
