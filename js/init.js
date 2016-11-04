@@ -106,15 +106,15 @@
         var $avSDC = $('.avSDC');
         var $avTel = $('.avTel');
 
-        var $xhrFR = $.getJSON('https://g-powderlines.herokuapp.com/station/663:CO:SNTL');
+        var $xhrFR = $.getJSON('https://g-powderlines.herokuapp.com/station/335:CO:SNTL');
         $xhrFR.done(function(data) {
             if ($xhrFR.status === 200 || $xhrFR.status === undefined) {
                 $avFR.empty();
                 if (data.data[5] === undefined) {
                     if (data.data[4]["Change In Snow Depth (in)"] === null) {
-                        $avFR.append('No Report');
+                        $avFR.append('0"');
                     } else {
-                        $avFR.append(data.data[4]["Change In Snow Depth (in)"] + '"*');
+                        $avFR.append(data.data[4]["Change In Snow Depth (in)"]  + '"');
                     }
                 } else {
                     $avFR.append(data.data[5]["Change In Snow Depth (in)"] + '"');
@@ -129,9 +129,9 @@
                 $avSB.empty();
                 if (data.data[5] === undefined) {
                     if (data.data[4]["Change In Snow Depth (in)"] === null) {
-                        $avSB.append('No Report');
+                        $avSB.append('0"');
                     } else {
-                        $avSB.append(data.data[4]["Change In Snow Depth (in)"] + '"*');
+                        $avSB.append(data.data[4]["Change In Snow Depth (in)"] + '"');
                     }
                 } else {
                     $avSB.append(data.data[5]["Change In Snow Depth (in)"] + '"');
@@ -146,9 +146,9 @@
                 $avVail.empty();
                 if (data.data[5] === undefined) {
                     if (data.data[4]["Change In Snow Depth (in)"] === null) {
-                        $avVail.append('No Report');
+                        $avVail.append('0"');
                     } else {
-                        $avVail.append(data.data[4]["Change In Snow Depth (in)"] + '"*');
+                        $avVail.append(data.data[4]["Change In Snow Depth (in)"] + '"');
                     }
                 } else {
                     $avVail.append(data.data[5]["Change In Snow Depth (in)"] + '"');
@@ -163,9 +163,9 @@
                 $avMon.empty();
                 if (data.data[5] === undefined) {
                     if (data.data[4]["Change In Snow Depth (in)"] === null) {
-                        $avMon.append('No Report');
+                        $avMon.append('0"');
                     } else {
-                        $avMon.append(data.data[4]["Change In Snow Depth (in)"] + '"*');
+                        $avMon.append(data.data[4]["Change In Snow Depth (in)"] + '"');
                     }
                 } else {
                     $avMon.append(data.data[5]["Change In Snow Depth (in)"] + '"');
@@ -180,9 +180,9 @@
                 $avAsp.empty();
                 if (data.data[5] === undefined) {
                     if (data.data[4]["Change In Snow Depth (in)"] === null) {
-                        $avAsp.append('No Report');
+                        $avAsp.append('0"');
                     } else {
-                        $avAsp.append(data.data[4]["Change In Snow Depth (in)"] + '"*');
+                        $avAsp.append(data.data[4]["Change In Snow Depth (in)"] + '"');
                     }
                 } else {
                     $avAsp.append(data.data[5]["Change In Snow Depth (in)"] + '"');
@@ -197,9 +197,9 @@
                 $avCB.empty();
                 if (data.data[5] === undefined) {
                     if (data.data[4]["Change In Snow Depth (in)"] === null) {
-                        $avCB.append('No Report');
+                        $avCB.append('0"');
                     } else {
-                        $avCB.append(data.data[4]["Change In Snow Depth (in)"] + '"*');
+                        $avCB.append(data.data[4]["Change In Snow Depth (in)"] + '"');
                     }
                 } else {
                     $avCB.append(data.data[5]["Change In Snow Depth (in)"] + '"');
@@ -214,9 +214,9 @@
                 $avSDC.empty();
                 if (data.data[5] === undefined) {
                     if (data.data[4]["Change In Snow Depth (in)"] === null) {
-                        $avSDC.append('no data avail');
+                        $avSDC.append('0"');
                     } else {
-                        $avSDC.append(data.data[4]["Change In Snow Depth (in)"] + '"*');
+                        $avSDC.append(data.data[4]["Change In Snow Depth (in)"] + '"');
                     }
                 } else {
                     $avSDC.append(data.data[5]["Change In Snow Depth (in)"] + '"');
@@ -231,9 +231,9 @@
                 $avTel.empty();
                 if (data.data[5] === undefined) {
                     if (data.data[4]["Change In Snow Depth (in)"] === null) {
-                        $avTel.append('No Report');
+                        $avTel.append('0"');
                     } else {
-                        $avTel.append(data.data[4]["Change In Snow Depth (in)"] + '"*');
+                        $avTel.append(data.data[4]["Change In Snow Depth (in)"] + '"');
                     }
                 } else {
                     $avTel.append(data.data[5]["Change In Snow Depth (in)"] + '"');
@@ -260,7 +260,7 @@
 
         allRequests.push($.getJSON('https://g-powderlines.herokuapp.com/station/415:CO:SNTL'));
 
-        allRequests.push($.getJSON('https://g-powderlines.herokuapp.com/station/1042:CO:SNTL'));
+        allRequests.push($.getJSON('https://g-powderlines.herokuapp.com/station/322:CO:SNTL'));
 
 
         Promise.all(allRequests).then(function(results) {
@@ -273,7 +273,7 @@
             dailySnowArr[0] = dailySnowObj.NIWOT[5]["Change In Snow Depth (in)"];
             dailySnowArr[1] = dailySnowObj["COPPER MOUNTAIN"][5]["Change In Snow Depth (in)"];
             dailySnowArr[2] = dailySnowObj["BERTHOUD SUMMIT"][5]["Change In Snow Depth (in)"];
-            dailySnowArr[3] = dailySnowObj["WILD BASIN"][5]["Change In Snow Depth (in)"];
+            dailySnowArr[3] = dailySnowObj["BEAR LAKE"][5]["Change In Snow Depth (in)"];
 
             var dailySnowNumArr = [];
             for (var c = 0; c < dailySnowArr.length; c++) {
@@ -322,7 +322,7 @@
                     }
                 },
                 series: [{
-                    name: 'Snow Pack Depth',
+                    name: 'New Snow 24 Hours',
                     data: dailySnowNumArr
                 }]
             };
@@ -523,7 +523,7 @@
                             type: 'line'
                         },
                         title: {
-                            text: 'Anual Snow Pack'
+                            text: 'Annual Snow Pack'
                         },
                         subtitle: {
                             text: 'Powderline API'
