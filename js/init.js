@@ -114,7 +114,7 @@
                     if (data.data[4]["Change In Snow Depth (in)"] === null) {
                         $avFR.append('0"');
                     } else {
-                        $avFR.append(data.data[4]["Change In Snow Depth (in)"]  + '"');
+                        $avFR.append(data.data[4]["Change In Snow Depth (in)"] + '"');
                     }
                 } else {
                     $avFR.append(data.data[5]["Change In Snow Depth (in)"] + '"');
@@ -338,12 +338,19 @@
         var searchVal = 322;
 
         var yearRadio = $("#year")
+        var radioVal = "none selected";
         // var yearSelected = false;
 
         $stationSearch.on("click", function() {
             event.preventDefault();
             searchVal = $select.val();
-
+            radioVal = $('input[name=time]:checked').val();
+            var timeSearch = 0;
+            console.log(radioVal);
+            if (radioVal === "YR") {
+                timeSearch = 395;
+            }
+            console.log(timeSearch);
             //collect snow pack observations from the end of the month
             var monthlySnow = [];
             var monthlyTemp = [];
@@ -353,7 +360,7 @@
 
 
 
-            var $xhr = $.getJSON('https://g-powderlines.herokuapp.com/station/' + searchVal + ':CO:SNTL?days=395');
+            var $xhr = $.getJSON('https://g-powderlines.herokuapp.com/station/' + searchVal + ':CO:SNTL?days=' + timeSearch);
             $xhr.done(function(data) {
                 if ($xhr.status === 200 || $xhr.status === undefined) {
                     //push snow pack depth at monthly intervals
@@ -562,6 +569,7 @@
                 } else {
                     return;
                 }
+
             });
         });
     }); // end of document ready
