@@ -343,17 +343,24 @@
 
         $stationSearch.on("click", function() {
             event.preventDefault();
+
             searchVal = $select.val();
+
+            //add radio button functionality for year
             radioVal = $('input[name=time]:checked').val();
             var timeSearch = 0;
-            console.log(radioVal);
             if (radioVal === "YR") {
                 timeSearch = 395;
+            }else if (radioVal === "MN"){
+                timeSearch = 29;
+            } else if (radioVal === "WK") {
+                timeSearch = 7;
             }
-            console.log(timeSearch);
+
             //collect snow pack observations from the end of the month
             var monthlySnow = [];
             var monthlyTemp = [];
+            var dailySnowArr29 = [];
             var dates = [];
 
             //Add a toggle to toggle year, month, week graph
@@ -364,6 +371,7 @@
             $xhr.done(function(data) {
                 if ($xhr.status === 200 || $xhr.status === undefined) {
                     //push snow pack depth at monthly intervals
+                  if(timeSearch === 395)  {
                     monthlySnow.push(data.data[29]["Snow Depth (in)"] + '"');
                     dates.push(data.data[29].Date);
                     monthlySnow.push(data.data[60]["Snow Depth (in)"] + '"');
@@ -401,13 +409,14 @@
                     }
 
 
+
                     //or grab all the years data and put them in seperate arrays every 30 days
                     var yearsTemp = [];
                     var yearsTempNum = [];
 
                     for (var j = 0; j < 395; j++) {
                         yearsTemp.push(data.data[j]["Air Temperature Observed (degF)"]);
-                        yearsTempNum.push(parseInt(yearsTemp[j], 10));
+                        yearsTempNum.push(parseInt(yearsTemp[j]));
                     }
 
 
@@ -463,7 +472,6 @@
                     removeNaN(oct16[0]);
                     removeNaN(nov16[0]);
 
-
                     //add and average the arrays:
                     var nov15Sum = 0;
                     var dec15Sum = 0;
@@ -498,7 +506,6 @@
                         nov16Sum += nov16[0][r];
                     }
 
-
                     var nov15SumAvrg = nov15Sum / nov15[0].length;
                     var dec15SumAvrg = dec15Sum / dec15[0].length;
                     var jan16SumAvrg = jan16Sum / jan16[0].length;
@@ -527,9 +534,17 @@
                     averageTempArr.push(Math.round(sept16SumAvrg));
                     averageTempArr.push(Math.round(oct16SumAvrg));
                     averageTempArr.push(Math.round(nov16SumAvrg));
+                  }
 
+                  // daily observations of snow over a month pushed to array
+                  else if (timeSearch === 29) {
+                    for (var q = 0; q < timeSearch; q++) {
+                       dailySnowArr29.push(parseInt(data.data[q]["Snow Depth (in)"]));
+                    }
+                    numArr = dailySnowArr29;
+                  }
 
-                    //annual snowfall chart
+                  //annual snowfall chart
                     var chartData = {
                         chart: {
                             type: 'line'
