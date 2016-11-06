@@ -52,43 +52,77 @@
         </div>
     </div>
     <div class="container">
-    <div class="row graphCenter">
-        <div class="input-field col s12">
-          <form>
-            <select id="select" name="select">
-              <optgroup label="Indian Peaks Wilderness">
+        <div class="row graphCenter">
+            <div class="col s4">
+                <form action="#">
+                    <p>
+                        <input name="WK" type="radio" id="week" />
+                        <label for="week">Week</label>
+                    </p>
+                    <p>
+                        <input name="MN" type="radio" id="month" />
+                        <label for="month">Month</label>
+                    </p>
+                    <p>
+                        <input name="YR" type="radio" id="year" />
+                        <label for="year">Year</label>
+                    </p>
+                </form>
+            </div>
+            <div class="col s4">
+                <form action="#">
+                    <p>
+                        <input name="SP" type="radio" id="snowpack" value="SP"/>
+                        <label for="snowpack">Snowpack</label>
+                    </p>
+                    <p>
+                        <input name="NS" type="radio" id="newSnow" value="NS"/>
+                        <label for="newSnow">New Snow</label>
+                    </p>
+                    <p>
+                        <input name="SWE" type="radio" id="swEquiv" value="SWE"/>
+                        <label for="swEquiv">Snow Water Equivalent</label>
+                    </p>
+                </form>
+            </div>
+        </div>
+        <div class="row graphCenter">
+          <div class="input-field col s12">
+            <form>
+              <select id="select" name="select">
+                <optgroup label="Indian Peaks Wilderness">
                   <option class="statSearchx" value="564">Lake Eldora --- 9,700 ft</option>
                   <option class="statSearchx" value="838">University Camp --- 10,300 ft</option>
-              </optgroup>
-              <optgroup label="Rocky Mountain National Park">
-                <option class="statSearch1" value="322">Bear Lake --- 9,500 ft</option>
-                <option class="statSearchx" value="1042">Wild Basin --- 9,560 ft</option>
-              </optgroup>
-              <optgroup label="I-70 Corridor">
-                <option class="statSearchx" value="335">Berthoud Summit ---  11,300 ft</option>
-                <option class="statSearchx" value="970">Jones Pass --- 10,400ft</option>
-                <option class="statSearchx" value="602">Loveland Basin --- 11,400 ft</option>
-                <option class="statSearchx" value="415">Copper Mountain --- 10,550 ft</option>
-                <option class="statSearchx" value="842">Vail Mountain --- 10,300 ft</option>
-              </optgroup>
-              <optgroup label="San Jauns">
-                <option class="statSearchx" value="586">Lizard Head Pass --- 10,200 ft</option>
-                <option class="statSearchx" value="713">Red Mountain Pass --- 11,200 ft</option>
-              </optgroup>
-            </select>
-            <label>Select Station to Graph</label>
-            <button class="btn waves-effect waves-light statSearch" type="submit" name="action">Submit
-                  <i class="material-icons right">send</i>
-                </button>
-          </form>
+                </optgroup>
+                <optgroup label="Rocky Mountain National Park">
+                  <option class="statSearch1" value="322">Bear Lake --- 9,500 ft</option>
+                  <option class="statSearchx" value="1042">Wild Basin --- 9,560 ft</option>
+                </optgroup>
+                <optgroup label="I-70 Corridor">
+                  <option class="statSearchx" value="335">Berthoud Summit ---  11,300 ft</option>
+                  <option class="statSearchx" value="970">Jones Pass --- 10,400ft</option>
+                  <option class="statSearchx" value="602">Loveland Basin --- 11,400 ft</option>
+                  <option class="statSearchx" value="415">Copper Mountain --- 10,550 ft</option>
+                  <option class="statSearchx" value="842">Vail Mountain --- 10,300 ft</option>
+                </optgroup>
+                <optgroup label="San Jauns">
+                  <option class="statSearchx" value="586">Lizard Head Pass --- 10,200 ft</option>
+                  <option class="statSearchx" value="713">Red Mountain Pass --- 11,200 ft</option>
+                </optgroup>
+              </select>
+              <label>Select Station to Graph</label>
+              <button class="btn waves-effect waves-light statSearch" type="submit" name="action">Submit
+                <i class="material-icons right">send</i>
+              </button>
+            </form>
+          </div>
         </div>
     </div>
-  </div>
-  <div class="row graphCenter">
-      <div class="container col s8">
-          <div id="container" style="min-width: 200px; height: 300px;  width: 800px; margin: 0 auto"></div>
-      </div>
-  </div>
+    <div class="row graphCenter">
+        <div class="container col s8">
+            <div id="container" style="min-width: 200px; height: 300px;  width: 800px; margin: 0 auto"></div>
+        </div>
+    </div>
 
 
     <footer class="page-footer teal">

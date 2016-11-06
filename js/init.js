@@ -337,6 +337,9 @@
         var $select = $('#select');
         var searchVal = 322;
 
+        var yearRadio = $("#year")
+        // var yearSelected = false;
+
         $stationSearch.on("click", function() {
             event.preventDefault();
             searchVal = $select.val();
@@ -345,6 +348,8 @@
             var monthlySnow = [];
             var monthlyTemp = [];
             var dates = [];
+
+            //Add a toggle to toggle year, month, week graph
 
 
 
