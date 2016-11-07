@@ -287,7 +287,7 @@
             var $newSnow = $('#newSnow');
             if ($newSnow[0]) {
                 for (var b = 0; b < dailySnowNumArr.length; b++) {
-                    if (dailySnowNumArr[b] >= 1) {
+                    if (dailySnowNumArr[b] >= 3) {
                         $newSnow[0].style.display = "block";
                         break;
                     }
@@ -534,6 +534,10 @@
                     averageTempArr.push(Math.round(sept16SumAvrg));
                     averageTempArr.push(Math.round(oct16SumAvrg));
                     averageTempArr.push(Math.round(nov16SumAvrg));
+
+
+                // still need to set thus up properly.  may swith whole system to day/month as number retrreved from API
+                    // xaxisMonths = ['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov']
                   }
 
                   // daily observations of snow over a month pushed to array
