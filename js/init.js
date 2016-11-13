@@ -350,18 +350,14 @@
             radioVal = $('input[name=time]:checked').val();
             var timeSearch = 0;
             if (radioVal === "YR") {
-                timeSearch = 395;
-            }else if (radioVal === "MN"){
-                timeSearch = 29;
+                timeSearch = 365;
+            } else if (radioVal === "MN") {
+                timeSearch = 30;
             } else if (radioVal === "WK") {
                 timeSearch = 7;
             }
 
-            //collect snow pack observations from the end of the month
-            var monthlySnow = [];
-            var monthlyTemp = [];
-            var dailySnowArr29 = [];
-            var dates = [];
+
 
             //Add a toggle to toggle year, month, week graph
 
@@ -370,185 +366,181 @@
             var $xhr = $.getJSON('https://g-powderlines.herokuapp.com/station/' + searchVal + ':CO:SNTL?days=' + timeSearch);
             $xhr.done(function(data) {
                 if ($xhr.status === 200 || $xhr.status === undefined) {
-                    //push snow pack depth at monthly intervals
-                  if(timeSearch === 395)  {
-                    monthlySnow.push(data.data[29]["Snow Depth (in)"] + '"');
-                    dates.push(data.data[29].Date);
-                    monthlySnow.push(data.data[60]["Snow Depth (in)"] + '"');
-                    dates.push(data.data[60].Date);
-                    monthlySnow.push(data.data[91]["Snow Depth (in)"] + '"');
-                    dates.push(data.data[91].Date);
-                    monthlySnow.push(data.data[120]["Snow Depth (in)"] + '"');
-                    dates.push(data.data[120].Date);
-                    monthlySnow.push(data.data[151]["Snow Depth (in)"] + '"');
-                    dates.push(data.data[151].Date);
-                    monthlySnow.push(data.data[181]["Snow Depth (in)"] + '"');
-                    dates.push(data.data[181].Date);
-                    monthlySnow.push(data.data[212]["Snow Depth (in)"] + '"');
-                    dates.push(data.data[212].Date);
-                    monthlySnow.push(data.data[242]["Snow Depth (in)"] + '"');
-                    dates.push(data.data[242].Date);
-                    monthlySnow.push(data.data[273]["Snow Depth (in)"] + '"');
-                    dates.push(data.data[273].Date);
-                    monthlySnow.push(data.data[304]["Snow Depth (in)"] + '"');
-                    dates.push(data.data[304].Date);
-                    monthlySnow.push(data.data[334]["Snow Depth (in)"] + '"');
-                    dates.push(data.data[334].Date);
-                    monthlySnow.push(data.data[365]["Snow Depth (in)"] + '"');
+                    //push snow pack depth at 30 day intervals over the year
+                    if (timeSearch === 365) {
+                        //collect snow pack observations from the end of the month
+                        var monthlySnow = [];
+                        var dailySnowArr29 = [];
+                        var xAxisCat = [];
+                        var sliceYear = [];
+                        var sliceMonth = [];
+                        var yearArr = [];
+                        var monthArr = [];
+                        var dateStr = "";
 
-                    //Get snow fall data for month
+                        for (var i = 0; i < 366; i = i + 30) {
+                            var str = data.data[i].Date;
+                            sliceYear = str.substring(4, 0);
+                            if (str.charAt(5) === "0") {
+                                sliceMonth = str.substring(7, 6);
+                            } else {
+                                sliceMonth = str.substring(7, 5);
+                            }
+                            yearArr.push(sliceYear);
+                            monthArr.push(sliceMonth);
+                            monthlySnow.push(data.data[i]["Snow Depth (in)"] + '"');
+                            dateStr = sliceMonth + "/" + sliceYear;
+                            xAxisCat.push(dateStr);
+                        };
 
-                    //convert monthly snow fall strings to number format
-                    var newSnow = [];
-                    var numArr = [];
-                    for (var i = 0; i < monthlySnow.length; i++) {
-                        newSnow.push(monthlySnow[i].replace('"', '.'));
-                        if (!isNaN(parseInt(newSnow[i], 10))) {
-                            numArr.push(parseInt(newSnow[i], 10));
-                        }
-                    }
-
-
-
-                    //or grab all the years data and put them in seperate arrays every 30 days
-                    var yearsTemp = [];
-                    var yearsTempNum = [];
-
-                    for (var j = 0; j < 395; j++) {
-                        yearsTemp.push(data.data[j]["Air Temperature Observed (degF)"]);
-                        yearsTempNum.push(parseInt(yearsTemp[j]));
-                    }
-
-
-                    //  use isNAN() to parse and correct the arrays that have NAN
-                    var nov15 = [];
-                    nov15.push(yearsTempNum.splice(30, 30));
-                    var dec15 = [];
-                    dec15.push(yearsTempNum.splice(0, 31));
-                    var jan16 = [];
-                    jan16.push(yearsTempNum.splice(0, 31));
-                    var feb16 = [];
-                    feb16.push(yearsTempNum.splice(0, 29));
-                    var mar16 = [];
-                    mar16.push(yearsTempNum.splice(0, 31));
-                    var apr16 = [];
-                    apr16.push(yearsTempNum.splice(0, 29));
-                    var may16 = [];
-                    may16.push(yearsTempNum.splice(0, 31));
-                    var jun16 = [];
-                    jun16.push(yearsTempNum.splice(0, 30));
-                    var jul16 = [];
-                    jul16.push(yearsTempNum.splice(0, 31));
-                    var aug16 = [];
-                    aug16.push(yearsTempNum.splice(0, 31));
-                    var sept16 = [];
-                    sept16.push(yearsTempNum.splice(0, 30));
-                    var oct16 = [];
-                    oct16.push(yearsTempNum.splice(0, 31));
-                    var nov16 = [];
-                    nov16.push(yearsTempNum.splice(0, 5));
-
-                    //need to remove all NaN from array
-                    var removeNaN = function(monthTempArr) {
-                        for (var t = 0; t < monthTempArr.length; t++) {
-                            if (isNaN(monthTempArr[t])) {
-                                monthTempArr.splice(t, 1);
+                        //convert monthly snowpack strings to number format
+                        var newSnow = [];
+                        var numArr = [];
+                        for (var i = 0; i < monthlySnow.length; i++) {
+                            newSnow.push(monthlySnow[i].replace('"', '.'));
+                            if (!isNaN(parseInt(newSnow[i], 10))) {
+                                numArr.push(parseInt(newSnow[i], 10));
                             }
                         }
-                        return monthTempArr;
-                    };
+                        //year temp data
+                        var yearsTemp = [];
+                        var yearsTempNum = [];
 
-                    removeNaN(nov15[0]);
-                    removeNaN(dec15[0]);
-                    removeNaN(jan16[0]);
-                    removeNaN(feb16[0]);
-                    removeNaN(mar16[0]);
-                    removeNaN(apr16[0]);
-                    removeNaN(may16[0]);
-                    removeNaN(jun16[0]);
-                    removeNaN(jul16[0]);
-                    removeNaN(aug16[0]);
-                    removeNaN(sept16[0]);
-                    removeNaN(oct16[0]);
-                    removeNaN(nov16[0]);
+                        for (var j = 0; j < 365; j++) {
+                            yearsTemp.push(data.data[j]["Air Temperature Observed (degF)"]);
+                            yearsTempNum.push(parseInt(yearsTemp[j]));
+                        }
 
-                    //add and average the arrays:
-                    var nov15Sum = 0;
-                    var dec15Sum = 0;
-                    var jan16Sum = 0;
-                    var feb16Sum = 0;
-                    var mar16Sum = 0;
-                    var apr16Sum = 0;
-                    var may16Sum = 0;
-                    var jun16Sum = 0;
-                    var jul16Sum = 0;
-                    var aug16Sum = 0;
-                    var sept16Sum = 0;
-                    var oct16Sum = 0;
-                    var nov16Sum = 0;
 
-                    for (var y = 0; y < 28; y++) {
-                        nov15Sum += nov15[0][y];
-                        dec15Sum += dec15[0][y];
-                        jan16Sum += jan16[0][y];
-                        feb16Sum += feb16[0][y];
-                        mar16Sum += mar16[0][y];
-                        apr16Sum += apr16[0][y];
-                        may16Sum += may16[0][y];
-                        jun16Sum += jun16[0][y];
-                        jul16Sum += jul16[0][y];
-                        aug16Sum += aug16[0][y];
-                        sept16Sum += sept16[0][y];
-                        oct16Sum += oct16[0][y];
-                        //  nov16Sum += nov16[0][y];
+                        //  use isNAN() to parse and correct the arrays that have NAN
+                        var nov15 = [];
+                        nov15.push(yearsTempNum.splice(30, 30));
+                        var dec15 = [];
+                        dec15.push(yearsTempNum.splice(0, 31));
+                        var jan16 = [];
+                        jan16.push(yearsTempNum.splice(0, 31));
+                        var feb16 = [];
+                        feb16.push(yearsTempNum.splice(0, 29));
+                        var mar16 = [];
+                        mar16.push(yearsTempNum.splice(0, 31));
+                        var apr16 = [];
+                        apr16.push(yearsTempNum.splice(0, 29));
+                        var may16 = [];
+                        may16.push(yearsTempNum.splice(0, 31));
+                        var jun16 = [];
+                        jun16.push(yearsTempNum.splice(0, 30));
+                        var jul16 = [];
+                        jul16.push(yearsTempNum.splice(0, 31));
+                        var aug16 = [];
+                        aug16.push(yearsTempNum.splice(0, 31));
+                        var sept16 = [];
+                        sept16.push(yearsTempNum.splice(0, 30));
+                        var oct16 = [];
+                        oct16.push(yearsTempNum.splice(0, 31));
+                        var nov16 = [];
+                        nov16.push(yearsTempNum.splice(0, 5));
+
+                        //need to remove all NaN from array
+                        var removeNaN = function(monthTempArr) {
+                            for (var t = 0; t < monthTempArr.length; t++) {
+                                if (isNaN(monthTempArr[t])) {
+                                    monthTempArr.splice(t, 1);
+                                }
+                            }
+                            return monthTempArr;
+                        };
+
+                        removeNaN(nov15[0]);
+                        removeNaN(dec15[0]);
+                        removeNaN(jan16[0]);
+                        removeNaN(feb16[0]);
+                        removeNaN(mar16[0]);
+                        removeNaN(apr16[0]);
+                        removeNaN(may16[0]);
+                        removeNaN(jun16[0]);
+                        removeNaN(jul16[0]);
+                        removeNaN(aug16[0]);
+                        removeNaN(sept16[0]);
+                        removeNaN(oct16[0]);
+                        removeNaN(nov16[0]);
+
+                        //add and average the arrays:
+                        var nov15Sum = 0;
+                        var dec15Sum = 0;
+                        var jan16Sum = 0;
+                        var feb16Sum = 0;
+                        var mar16Sum = 0;
+                        var apr16Sum = 0;
+                        var may16Sum = 0;
+                        var jun16Sum = 0;
+                        var jul16Sum = 0;
+                        var aug16Sum = 0;
+                        var sept16Sum = 0;
+                        var oct16Sum = 0;
+                        var nov16Sum = 0;
+
+                        for (var y = 0; y < 28; y++) {
+                            nov15Sum += nov15[0][y];
+                            dec15Sum += dec15[0][y];
+                            jan16Sum += jan16[0][y];
+                            feb16Sum += feb16[0][y];
+                            mar16Sum += mar16[0][y];
+                            apr16Sum += apr16[0][y];
+                            may16Sum += may16[0][y];
+                            jun16Sum += jun16[0][y];
+                            jul16Sum += jul16[0][y];
+                            aug16Sum += aug16[0][y];
+                            sept16Sum += sept16[0][y];
+                            oct16Sum += oct16[0][y];
+                            //  nov16Sum += nov16[0][y];
+                        }
+                        for (var r = 0; r < nov16[0].length; r++) {
+                            nov16Sum += nov16[0][r];
+                        }
+
+                        var nov15SumAvrg = nov15Sum / nov15[0].length;
+                        var dec15SumAvrg = dec15Sum / dec15[0].length;
+                        var jan16SumAvrg = jan16Sum / jan16[0].length;
+                        var feb16SumAvrg = feb16Sum / feb16[0].length;
+                        var mar16SumAvrg = mar16Sum / mar16[0].length;
+                        var apr16SumAvrg = apr16Sum / apr16[0].length;
+                        var may16SumAvrg = may16Sum / may16[0].length;
+                        var jun16SumAvrg = jun16Sum / jun16[0].length;
+                        var jul16SumAvrg = jul16Sum / jul16[0].length;
+                        var aug16SumAvrg = aug16Sum / aug16[0].length;
+                        var sept16SumAvrg = sept16Sum / sept16[0].length;
+                        var oct16SumAvrg = oct16Sum / oct16[0].length;
+                        var nov16SumAvrg = nov16Sum / nov16[0].length;
+
+                        var averageTempArr = [];
+                        // averageTempArr.push(Math.round(nov15SumAvrg));
+                        averageTempArr.push(Math.round(dec15SumAvrg));
+                        averageTempArr.push(Math.round(jan16SumAvrg));
+                        averageTempArr.push(Math.round(feb16SumAvrg));
+                        averageTempArr.push(Math.round(mar16SumAvrg));
+                        averageTempArr.push(Math.round(apr16SumAvrg));
+                        averageTempArr.push(Math.round(may16SumAvrg));
+                        averageTempArr.push(Math.round(jun16SumAvrg));
+                        averageTempArr.push(Math.round(jul16SumAvrg));
+                        averageTempArr.push(Math.round(aug16SumAvrg));
+                        averageTempArr.push(Math.round(sept16SumAvrg));
+                        averageTempArr.push(Math.round(oct16SumAvrg));
+                        averageTempArr.push(Math.round(nov16SumAvrg));
+
+
+                        // still need to set thus up properly.  may swith whole system to day/month as number retrreved from API
+                        // xaxisMonths = ['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov']
                     }
-                    for (var r = 0; r < nov16[0].length; r++) {
-                        nov16Sum += nov16[0][r];
+
+                    // daily observations of snow over a month pushed to array
+                    else if (timeSearch === 30) {
+                        for (var q = 0; q < timeSearch; q++) {
+                            dailySnowArr29.push(parseInt(data.data[q]["Snow Depth (in)"]));
+                        }
+                        numArr = dailySnowArr29;
                     }
 
-                    var nov15SumAvrg = nov15Sum / nov15[0].length;
-                    var dec15SumAvrg = dec15Sum / dec15[0].length;
-                    var jan16SumAvrg = jan16Sum / jan16[0].length;
-                    var feb16SumAvrg = feb16Sum / feb16[0].length;
-                    var mar16SumAvrg = mar16Sum / mar16[0].length;
-                    var apr16SumAvrg = apr16Sum / apr16[0].length;
-                    var may16SumAvrg = may16Sum / may16[0].length;
-                    var jun16SumAvrg = jun16Sum / jun16[0].length;
-                    var jul16SumAvrg = jul16Sum / jul16[0].length;
-                    var aug16SumAvrg = aug16Sum / aug16[0].length;
-                    var sept16SumAvrg = sept16Sum / sept16[0].length;
-                    var oct16SumAvrg = oct16Sum / oct16[0].length;
-                    var nov16SumAvrg = nov16Sum / nov16[0].length;
-
-                    var averageTempArr = [];
-                    // averageTempArr.push(Math.round(nov15SumAvrg));
-                    averageTempArr.push(Math.round(dec15SumAvrg));
-                    averageTempArr.push(Math.round(jan16SumAvrg));
-                    averageTempArr.push(Math.round(feb16SumAvrg));
-                    averageTempArr.push(Math.round(mar16SumAvrg));
-                    averageTempArr.push(Math.round(apr16SumAvrg));
-                    averageTempArr.push(Math.round(may16SumAvrg));
-                    averageTempArr.push(Math.round(jun16SumAvrg));
-                    averageTempArr.push(Math.round(jul16SumAvrg));
-                    averageTempArr.push(Math.round(aug16SumAvrg));
-                    averageTempArr.push(Math.round(sept16SumAvrg));
-                    averageTempArr.push(Math.round(oct16SumAvrg));
-                    averageTempArr.push(Math.round(nov16SumAvrg));
-
-
-                // still need to set thus up properly.  may swith whole system to day/month as number retrreved from API
-                    // xaxisMonths = ['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov']
-                  }
-
-                  // daily observations of snow over a month pushed to array
-                  else if (timeSearch === 29) {
-                    for (var q = 0; q < timeSearch; q++) {
-                       dailySnowArr29.push(parseInt(data.data[q]["Snow Depth (in)"]));
-                    }
-                    numArr = dailySnowArr29;
-                  }
-
-                  //annual snowfall chart
+                    //annual snowfall chart
                     var chartData = {
                         chart: {
                             type: 'line'
@@ -560,7 +552,7 @@
                             text: 'Powderline API'
                         },
                         xAxis: {
-                            categories: ['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov']
+                            categories: xAxisCat
                         },
                         yAxis: {
                             title: {
