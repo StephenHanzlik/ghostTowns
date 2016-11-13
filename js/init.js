@@ -424,7 +424,13 @@
                       else if (dataType === "newSnow") {
                         console.log(data.data);
                           for (var q = 0; q < timeSearch + 1; q++) {
-                            dailySnowArr29.push(parseInt(data.data[q]["Change In Snow Depth (in)"]));
+                            if(parseInt(data.data[q]["Change In Snow Depth (in)"]) > 0){
+                              console.log(data.data[q]["Change In Snow Depth (in)"])
+                              dailySnowArr29.push(parseInt(data.data[q]["Change In Snow Depth (in)"]));
+                            }
+                            else {
+                              dailySnowArr29.push('0');
+                            }
                             var str = data.data[q].Date;
                             sliceYear = str.substring(10, 8);
                             if (str.charAt(5) === "0") {
@@ -437,7 +443,7 @@
                             xAxisCat.push(dateStr);
                           }
                           numArr = dailySnowArr29;
-                          chartType = 'bar';
+                          chartType = 'column';
                           chartTitle = '360 Day New Snow';
                           series1Name = 'New Snow 24 Hours';
                           var seriesArr = [{
