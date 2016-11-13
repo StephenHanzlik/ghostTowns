@@ -33,9 +33,9 @@
 
     $(document).ready(function() {
 
-
-        //Manipulate DOM on index page
-
+        // 
+        // Manipulate DOM on index page
+        // commented out to reduc AJAX will testing
         var $xhr0 = $.getJSON('https://g-powderlines.herokuapp.com/station/663:CO:SNTL');
         $xhr0.done(function(data) {
             if ($xhr0.status === 200 || $xhr0.status === undefined) {
@@ -234,9 +234,7 @@
             } else {
                 return;
             }
-        });
-
-
+        }); //end commented out AJAX for testing
 
         //plot 24 hour snow to bar graph
 
@@ -420,7 +418,7 @@
                             name: series1Name,
                             data: numArr
                           }];
-                      } //end of origonal temp average /snowpack Calc
+                      }
                       else if (dataType === "newSnow") {
                         console.log(data.data);
                           for (var q = 0; q < timeSearch + 1; q++) {
