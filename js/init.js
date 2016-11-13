@@ -375,6 +375,7 @@
                     var xAxisCat = [];
                     var chartType = "line";
                     var chartTitle = "";
+                    var series1Name = "";
                     var sliceYear = [];
                     var sliceMonth = [];
                     var yearArr = [];
@@ -583,16 +584,39 @@
 
                       chartType = 'line';
                       chartTitle = 'Annual Snow Pack';
+                      series1Name = 'Snow Pack Depth';
+                      var seriesArr = [{
+                          name: series1Name,
+                          data: numArr
+                      }, {
+                          name: 'Average Temperature',
+                          data: averageTempArr
+                      }];
                     }
 
                     // daily observations of snow over a month pushed to array
                     else if (timeSearch === 30) {
-                        for (var q = 0; q < timeSearch; q++) {
+                        for (var q = 0; q < timeSearch + 1; q++) {
                             dailySnowArr29.push(parseInt(data.data[q]["Snow Depth (in)"]));
+                            var str = data.data[q].Date;
+                            sliceYear = str.substring(10, 8);
+                            if (str.charAt(5) === "0") {
+                                sliceMonth = str.substring(7, 6);
+                            } else {
+                                sliceMonth = str.substring(7, 5);
+                            }
+
+                            dateStr = sliceMonth + "/" + sliceYear;
+                            xAxisCat.push(dateStr);
                         }
                         numArr = dailySnowArr29;
-                        chartType = 'bar';
-                        chartTitle = '30 Day Snowpack';
+                        chartType = 'column';
+                        chartTitle = '30 Day New Snowpack';
+                        series1Name = 'New Snow 24 Hours';
+                        var seriesArr = [{
+                            name: series1Name,
+                            data: numArr
+                        }];
                     }
 
                     //annual snowfall chart
@@ -622,13 +646,14 @@
                                 enableMouseTracking: true
                             }
                         },
-                        series: [{
-                            name: 'Snow Pack Depth',
-                            data: numArr
-                        }, {
-                            name: 'Average Temperature',
-                            data: averageTempArr
-                        }]
+                        series: seriesArr
+                        // series: [{
+                        //     name: series1Name,
+                        //     data: numArr
+                        // }, {
+                        //     name: 'Average Temperature',
+                        //     data: averageTempArr
+                        // }]
                     };
                     Highcharts.chart('container', chartData);
 
