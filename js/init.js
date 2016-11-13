@@ -398,20 +398,68 @@
                         var numArr = [];
                         for (var i = 0; i < monthlySnow.length; i++) {
                             newSnow.push(monthlySnow[i].replace('"', '.'));
-                            if (!isNaN(parseInt(newSnow[i], 10))) {
+                            // if (!isNaN(parseInt(newSnow[i], 10))) {
                                 numArr.push(parseInt(newSnow[i], 10));
-                            }
+                              // }
                         }
-                        //year temp data
+                        //daily temps and months strings for year pushed to arrays
                         var yearsTemp = [];
                         var yearsTempNum = [];
+                        var yearsTempDate = [];
+                        var yearsTempDateArr = [];
+                        var yearsTempObj = {};
+                        var singleObjArr = [];
 
-                        for (var j = 0; j < 365; j++) {
+                        for (var j = 0; j < 366; j++) {
                             yearsTemp.push(data.data[j]["Air Temperature Observed (degF)"]);
                             yearsTempNum.push(parseInt(yearsTemp[j]));
+                            var strDate = data.data[j].Date;
+                            yearsTempDate.push(strDate);
+                            var key = `${yearsTempDate[j]}`;
+                            yearsTempObj = {
+                                [key]: yearsTempNum[j]
+                            }
+                            yearsTempDateArr.push(yearsTempObj);
                         }
 
+                        //converts array of multiple objects into one object
+                        singleObjArr = yearsTempDateArr.reduce(function(result, currentObj) {
+                          for (var key in currentObj) {
+                            if (currentObj.hasOwnProperty(key)) {
+                              result[key] = currentObj[key];
+                            }
+                          }
+                          return result;
+                        }, {});
 
+
+                        //this still needs work.  What do we do with the data in the array?
+                        var objKeys = Object.keys(singleObjArr);
+                        //
+                        for (var q = 0; q < objKeys.length - 1; q++){
+                          if(objKeys[q].substring(7,0) === '2015-11'){
+                            console.log("boogie with the dinky");
+                          }
+                          else if(objKeys[q].substring(7,0) === '2015-12')
+                        }
+
+                        if(objKeys[q].substring(7, 5) === '12' && objKeys[q].substring(4, 0) !== objKeys[q+13] )
+                        console.log("****");
+                        console.log(singleObjArr);
+
+                        // if(yearsTempDate[j] === "01" || yearsTempDate[j] === "03" || yearsTempDate[j] === "05" || yearsTempDate[j] === "07" || yearsTempDate[j] === "08" || yearsTempDate[j] === "10" || yearsTempDate[j] === "12") {
+                        //   yearsTempNum[j]
+                        // }
+                        //
+                        //
+                        // console.log("****");
+                        // console.log(yearsTempDate);
+                        // console.log(yearsTemp);
+                        //collect dates and add month length corrisponing to it
+                        // for (var u = 0; u < yearsTempNum.length - 1; u++){
+                        //   if(yearsTempDate[i])
+                        // }
+                        // yearsTempNum
                         //  use isNAN() to parse and correct the arrays that have NAN
                         var nov15 = [];
                         nov15.push(yearsTempNum.splice(30, 30));
