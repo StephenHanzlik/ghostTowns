@@ -395,30 +395,30 @@
 
                     if (timeSearch === 365) {
                         //collect snow pack observations from the end of the month
-
+                      if(dataType === "snowPack") {
                         for (var i = 0; i < 366; i = i + 30) {
-                            var str = data.data[i].Date;
-                            sliceYear = str.substring(4, 0);
-                            if (str.charAt(5) === "0") {
-                                sliceMonth = str.substring(7, 6);
-                            } else {
-                                sliceMonth = str.substring(7, 5);
-                            }
-                            yearArr.push(sliceYear);
-                            monthArr.push(sliceMonth);
-                            monthlySnow.push(data.data[i]["Snow Depth (in)"] + '"');
-                            dateStr = sliceMonth + "/" + sliceYear;
-                            xAxisCat.push(dateStr);
+                          var str = data.data[i].Date;
+                          sliceYear = str.substring(4, 0);
+                          if (str.charAt(5) === "0") {
+                            sliceMonth = str.substring(7, 6);
+                          } else {
+                            sliceMonth = str.substring(7, 5);
+                          }
+                          yearArr.push(sliceYear);
+                          monthArr.push(sliceMonth);
+                          monthlySnow.push(data.data[i]["Snow Depth (in)"] + '"');
+                          dateStr = sliceMonth + "/" + sliceYear;
+                          xAxisCat.push(dateStr);
                         }
 
                         //convert monthly snowpack strings to number format
                         var newSnow = [];
                         var numArr = [];
                         for (var z = 0; z < monthlySnow.length; z++) {
-                            newSnow.push(monthlySnow[z].replace('"', '.'));
-                            // if (!isNaN(parseInt(newSnow[i], 10))) {
-                                numArr.push(parseInt(newSnow[z], 10));
-                              // }
+                          newSnow.push(monthlySnow[z].replace('"', '.'));
+                          // if (!isNaN(parseInt(newSnow[i], 10))) {
+                          numArr.push(parseInt(newSnow[z], 10));
+                          // }
                         }
                         //daily temps and months strings for year pushed to arrays
                         var yearsTemp = [];
@@ -429,16 +429,16 @@
                         var singleObjArr = [];
 
                         for (var j = 0; j < 366; j++) {
-                            yearsTemp.push(data.data[j]["Air Temperature Observed (degF)"]);
-                            yearsTempNum.push(parseInt(yearsTemp[j]));
-                            var strDate = data.data[j].Date;
-                            yearsTempDate.push(strDate);
-                            var key = `${yearsTempDate[j]}`;
-                            yearsTempObj = {
-                                [key]: yearsTempNum[j]
-                            };
-                            yearsTempDateArr.push(yearsTempObj);
-                          }
+                          yearsTemp.push(data.data[j]["Air Temperature Observed (degF)"]);
+                          yearsTempNum.push(parseInt(yearsTemp[j]));
+                          var strDate = data.data[j].Date;
+                          yearsTempDate.push(strDate);
+                          var key = `${yearsTempDate[j]}`;
+                          yearsTempObj = {
+                            [key]: yearsTempNum[j]
+                          };
+                          yearsTempDateArr.push(yearsTempObj);
+                        }
 
                         //converts array of multiple objects into one object
                         singleObjArr = yearsTempDateArr.reduce(function(result, currentObj) {
@@ -546,22 +546,22 @@
                         var nov16Sum = 0;
 
                         for (var y = 0; y < 28; y++) {
-                            nov15Sum += nov15[0][y];
-                            dec15Sum += dec15[0][y];
-                            jan16Sum += jan16[0][y];
-                            feb16Sum += feb16[0][y];
-                            mar16Sum += mar16[0][y];
-                            apr16Sum += apr16[0][y];
-                            may16Sum += may16[0][y];
-                            jun16Sum += jun16[0][y];
-                            jul16Sum += jul16[0][y];
-                            aug16Sum += aug16[0][y];
-                            sept16Sum += sept16[0][y];
-                            oct16Sum += oct16[0][y];
-                            //  nov16Sum += nov16[0][y];
+                          nov15Sum += nov15[0][y];
+                          dec15Sum += dec15[0][y];
+                          jan16Sum += jan16[0][y];
+                          feb16Sum += feb16[0][y];
+                          mar16Sum += mar16[0][y];
+                          apr16Sum += apr16[0][y];
+                          may16Sum += may16[0][y];
+                          jun16Sum += jun16[0][y];
+                          jul16Sum += jul16[0][y];
+                          aug16Sum += aug16[0][y];
+                          sept16Sum += sept16[0][y];
+                          oct16Sum += oct16[0][y];
+                          //  nov16Sum += nov16[0][y];
                         }
                         for (var r = 0; r < nov16[0].length; r++) {
-                            nov16Sum += nov16[0][r];
+                          nov16Sum += nov16[0][r];
                         }
 
                         // var nov15SumAvrg = nov15Sum / nov15[0].length;
@@ -593,17 +593,21 @@
                         averageTempArr.push(Math.round(oct16SumAvrg));
                         averageTempArr.push(Math.round(nov16SumAvrg));
 
-                      chartType = 'line';
-                      chartTitle = 'Annual Snow Pack';
-                      series1Name = 'Snow Pack Depth';
-                      var seriesArr = [{
+                        chartType = 'line';
+                        chartTitle = 'Annual Snow Pack';
+                        series1Name = 'Snow Pack Depth';
+                        var seriesArr = [{
                           name: series1Name,
                           data: numArr
-                      }, {
+                        }, {
                           name: 'Average Temperature',
                           data: averageTempArr
-                      }];
-                    }
+                        }];
+                      } //end of origonal temp average /snowpack Calc
+
+
+
+                      }
 
                     // daily observations of snow over a month pushed to array
                     else if (timeSearch === 30) {
