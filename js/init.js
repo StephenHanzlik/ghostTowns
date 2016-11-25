@@ -33,7 +33,7 @@
 
     $(document).ready(function() {
 
-        // 
+        //
         // Manipulate DOM on index page
         // commented out to reduc AJAX will testing
         var $xhr0 = $.getJSON('https://g-powderlines.herokuapp.com/station/663:CO:SNTL');
@@ -274,50 +274,107 @@
             }
 
             // check daily snow for red button on index page
-
-            var $newSnow = $('#newSnow');
-            if ($newSnow[0]) {
-                for (var b = 0; b < dailySnowNumArr.length; b++) {
-                    if (dailySnowNumArr[b] >= 3) {
-                        $newSnow[0].style.display = "block";
-                        break;
-                    }
-                }
-            }
-
-
-            var chartData2 = {
-                chart: {
-                    type: 'bar'
-                },
-                title: {
-                    text: 'New Snow Report 24 Hours'
-                },
-                subtitle: {
-                    text: 'Powderline API'
-                },
-                xAxis: {
-                    categories: ['Eldora', 'Copper', 'Berthoud', 'RMNP']
-                },
-                yAxis: {
-                    title: {
-                        text: 'Inches'
-                    }
-                },
-                plotOptions: {
-                    line: {
-                        dataLabels: {
-                            enabled: true
-                        },
-                        enableMouseTracking: true
-                    }
-                },
-                series: [{
-                    name: 'New Snow 24 Hours',
-                    data: dailySnowNumArr
-                }]
-            };
-            Highcharts.chart('container2', chartData2);
+            //
+            // var $newSnow = $('#newSnow');
+            // if ($newSnow[0]) {
+            //     for (var b = 0; b < dailySnowNumArr.length; b++) {
+            //         if (dailySnowNumArr[b] >= 3) {
+            //             $newSnow[0].style.display = "block";
+            //             break;
+            //         }
+            //     }
+            // }
+            // var $stationSearch = $(".statSearch");
+            // var $select = $('#select');
+            // var searchVal = 322;
+            //
+            // var yearRadio = $("#year");
+            // var radioVal = "none selected";
+            // var radioVal2 = "none selected";
+            //
+            // var dailySnowArr29 = [];
+            // var xAxisCat = [];
+            // var chartType = "line";
+            // var chartTitle = "";
+            // var series1Name = "";
+            // var sliceYear = [];
+            // var sliceMonth = [];
+            // var dateStr = "";
+            // var numArr = [];
+            //
+            // var newSnowCalc = function (){
+            //   for (var q = 0; q < timeSearch + 1; q++) {
+            //     if(parseInt(data.data[q]["Change In Snow Depth (in)"]) > 0){
+            //       dailySnowArr29.push(parseInt(data.data[q]["Change In Snow Depth (in)"]));
+            //     }
+            //     else {
+            //       dailySnowArr29.push('0');
+            //     }
+            //     var str = data.data[q].Date;
+            //     sliceYear = str.substring(10, 8);
+            //     if (str.charAt(5) === "0") {
+            //       sliceMonth = str.substring(7, 6);
+            //     } else {
+            //       sliceMonth = str.substring(7, 5);
+            //     }
+            //
+            //     dateStr = sliceMonth + "/" + sliceYear;
+            //     xAxisCat.push(dateStr);
+            //   }
+            // };
+            //
+            // var $xhr = $.getJSON('https://g-powderlines.herokuapp.com/station/' + 564 + ':CO:SNTL?days=' + 7);
+            // $xhr.done(function(data) {
+            //     if ($xhr.status === 200 || $xhr.status === undefined) {
+            //       newSnowCalc();
+            //       var numArr = dailySnowArr29;
+            //       var chartType = 'column';
+            //       var chartTitle = '360 Day New Snow';
+            //       var series1Name = 'New Snow 24 Hours';
+            //       var seriesArr = [{
+            //         name: series1Name,
+            //         data: numArr
+            //       }];
+            //       var chartData2 = {
+            //         chart: {
+            //           type: chartType
+            //         },
+            //         title: {
+            //           text: chartTitle
+            //         },
+            //         subtitle: {
+            //           text: 'Powderline API'
+            //         },
+            //         xAxis: {
+            //           categories: xAxisCat
+            //         },
+            //         yAxis: {
+            //           title: {
+            //             text: 'Inches'
+            //           }
+            //         },
+            //         plotOptions: {
+            //           line: {
+            //             dataLabels: {
+            //               enabled: true
+            //             },
+            //             enableMouseTracking: true
+            //           }
+            //         },
+            //         series: seriesArr
+            //         // series: [{
+            //         //     name: series1Name,
+            //         //     data: numArr
+            //         // }, {
+            //         //     name: 'Average Temperature',
+            //         //     data: averageTempArr
+            //         // }]
+            //       };
+            //     } else {
+            //       return;
+            //     }
+            //   });
+            Highcharts.chart('container', chartData2);
 
         });
 
@@ -343,6 +400,8 @@
           return monthTempArr;
         };
 
+
+
         $stationSearch.on("click", function() {
             event.preventDefault();
 
@@ -353,6 +412,8 @@
             var timeSearch = 0;
             if (radioVal === "YR") {
                 timeSearch = 365;
+            } else if (radioVal === "threeYR"){
+                timeSearch = 1301;
             } else if (radioVal === "MN") {
                 timeSearch = 30;
             } else if (radioVal === "WK") {
@@ -367,167 +428,228 @@
               dataType = "newSnow";
             } else if (radioVal2 === "SWE"){
               dataType = "snowWaterEquiv";
+            } else if (radioVal2 === "TP"){
+              dataType = "temp";
             }
 
-
-
-            //Add a toggle to toggle year, month, week graph
-
-
-
+            //Add a toggle to toggle year, month, week grap
             var $xhr = $.getJSON('https://g-powderlines.herokuapp.com/station/' + searchVal + ':CO:SNTL?days=' + timeSearch);
             $xhr.done(function(data) {
                 if ($xhr.status === 200 || $xhr.status === undefined) {
                     //push snow pack depth at 30 day intervals over the year
-                    var monthlySnow = [];
                     var dailySnowArr29 = [];
                     var xAxisCat = [];
+                    var yAxisTitle = [];
                     var chartType = "line";
                     var chartTitle = "";
                     var series1Name = "";
                     var sliceYear = [];
                     var sliceMonth = [];
-                    var yearArr = [];
-                    var monthArr = [];
                     var dateStr = "";
-
                     var numArr = [];
 
-                    if (timeSearch === 365) {
-                        //collect snow pack observations from the end of the month
-                      if(dataType === "snowPack") {
-                        console.log(data.data);
-                          for (var q = 0; q < timeSearch + 1; q++) {
-                            dailySnowArr29.push(parseInt(data.data[q]["Snow Depth (in)"]));
-                            var str = data.data[q].Date;
-                            sliceYear = str.substring(10, 8);
-                            if (str.charAt(5) === "0") {
-                              sliceMonth = str.substring(7, 6);
-                            } else {
-                              sliceMonth = str.substring(7, 5);
-                            }
-
-                            dateStr = sliceMonth + "/" + sliceYear;
-                            xAxisCat.push(dateStr);
-                          }
-                          numArr = dailySnowArr29;
-                          chartType = 'column';
-                          chartTitle = '360 Day Snow Pack';
-                          series1Name = 'Snow Pack Depth';
-                          var seriesArr = [{
-                            name: series1Name,
-                            data: numArr
-                          }];
-                      }
-                      else if (dataType === "newSnow") {
-                        console.log(data.data);
-                          for (var q = 0; q < timeSearch + 1; q++) {
-                            if(parseInt(data.data[q]["Change In Snow Depth (in)"]) > 0){
-                              console.log(data.data[q]["Change In Snow Depth (in)"])
-                              dailySnowArr29.push(parseInt(data.data[q]["Change In Snow Depth (in)"]));
-                            }
-                            else {
-                              dailySnowArr29.push('0');
-                            }
-                            var str = data.data[q].Date;
-                            sliceYear = str.substring(10, 8);
-                            if (str.charAt(5) === "0") {
-                              sliceMonth = str.substring(7, 6);
-                            } else {
-                              sliceMonth = str.substring(7, 5);
-                            }
-
-                            dateStr = sliceMonth + "/" + sliceYear;
-                            xAxisCat.push(dateStr);
-                          }
-                          numArr = dailySnowArr29;
-                          chartType = 'column';
-                          chartTitle = '360 Day New Snow';
-                          series1Name = 'New Snow 24 Hours';
-                          var seriesArr = [{
-                            name: series1Name,
-                            data: numArr
-                          }];
-                      }
-                      else if (dataType === "snowWaterEquiv"){
-                        console.log(data.data);
-                        for (var q = 0; q < timeSearch + 1; q++) {
-                          dailySnowArr29.push(parseInt(data.data[q]['Snow Water Equivalent (in)']));
-                          var str = data.data[q].Date;
-                          sliceYear = str.substring(10, 8);
-                          if (str.charAt(5) === "0") {
-                            sliceMonth = str.substring(7, 6);
-                          } else {
-                            sliceMonth = str.substring(7, 5);
-                          }
-
-                          dateStr = sliceMonth + "/" + sliceYear;
-                          xAxisCat.push(dateStr);
+                    //Functions for manipulating data to graph
+                    var snowDepthCalc = function () {
+                      for (var q = 0; q < timeSearch + 1; q++) {
+                        dailySnowArr29.push(parseInt(data.data[q]["Snow Depth (in)"]));
+                        var str = data.data[q].Date;
+                        sliceYear = str.substring(10, 8);
+                        if (str.charAt(5) === "0") {
+                          sliceMonth = str.substring(7, 6);
+                        } else {
+                          sliceMonth = str.substring(7, 5);
                         }
-                        numArr = dailySnowArr29;
-                        chartType = 'column';
-                        chartTitle = '360 Day Snow Water Equivalent';
-                        series1Name = 'Snow Water Equiv.';
-                        var seriesArr = [{
-                          name: series1Name,
-                          data: numArr
-                        }];
 
-                      }
-
-                      }
-
-                    // daily observations of snow over a month pushed to array
-                    else if (timeSearch === 30) {
-                      if(dataType === "snowPack") {
-                        console.log(data.data);
-                        for (var q = 0; q < timeSearch + 1; q++) {
-                          dailySnowArr29.push(parseInt(data.data[q]["Snow Depth (in)"]));
-                          var str = data.data[q].Date;
-                          sliceYear = str.substring(10, 8);
-                          if (str.charAt(5) === "0") {
-                            sliceMonth = str.substring(7, 6);
-                          } else {
-                            sliceMonth = str.substring(7, 5);
-                          }
-
-                          dateStr = sliceMonth + "/" + sliceYear;
-                          xAxisCat.push(dateStr);
-                        }
-                        numArr = dailySnowArr29;
-                        chartType = 'column';
-                        chartTitle = '30 Day Snow Pack';
+                        dateStr = sliceMonth + "/" + sliceYear;
+                        xAxisCat.push(dateStr);
+                        yAxisTitle = "Inches";
                         series1Name = 'Snow Pack Depth';
                         var seriesArr = [{
                           name: series1Name,
                           data: numArr
                         }];
                       }
-                      else if (dataType === "newSnow") {
-                        console.log(data.data);
-                          for (var q = 0; q < timeSearch + 1; q++) {
-                            if(parseInt(data.data[q]["Change In Snow Depth (in)"]) > 0){
-                              console.log(data.data[q]["Change In Snow Depth (in)"])
-                              dailySnowArr29.push(parseInt(data.data[q]["Change In Snow Depth (in)"]));
-                            }
-                            else {
-                              dailySnowArr29.push('0');
-                            }
-                            var str = data.data[q].Date;
-                            sliceYear = str.substring(10, 8);
-                            if (str.charAt(5) === "0") {
-                              sliceMonth = str.substring(7, 6);
-                            } else {
-                              sliceMonth = str.substring(7, 5);
-                            }
+                    };
+                    var newSnowCalc = function (){
+                      for (var q = 0; q < timeSearch + 1; q++) {
+                        if(parseInt(data.data[q]["Change In Snow Depth (in)"]) > 0){
+                          dailySnowArr29.push(parseInt(data.data[q]["Change In Snow Depth (in)"]));
+                        }
+                        else {
+                          dailySnowArr29.push('0');
+                        }
+                        var str = data.data[q].Date;
+                        sliceYear = str.substring(10, 8);
+                        if (str.charAt(5) === "0") {
+                          sliceMonth = str.substring(7, 6);
+                        } else {
+                          sliceMonth = str.substring(7, 5);
+                        }
 
-                            dateStr = sliceMonth + "/" + sliceYear;
-                            xAxisCat.push(dateStr);
-                          }
+                        dateStr = sliceMonth + "/" + sliceYear;
+                        xAxisCat.push(dateStr);
+                        yAxisTitle = "Inches";
+                        series1Name = 'New Snow 24 Hours';
+                        var seriesArr = [{
+                          name: series1Name,
+                          data: numArr
+                        }];
+                      }
+                    };
+                    var snowWaterEquivCalc = function(){
+                      for (var q = 0; q < timeSearch + 1; q++) {
+                        dailySnowArr29.push(parseInt(data.data[q]['Snow Water Equivalent (in)']));
+                        var str = data.data[q].Date;
+                        sliceYear = str.substring(10, 8);
+                        if (str.charAt(5) === "0") {
+                          sliceMonth = str.substring(7, 6);
+                        } else {
+                          sliceMonth = str.substring(7, 5);
+                        }
+
+                        dateStr = sliceMonth + "/" + sliceYear;
+                        xAxisCat.push(dateStr);
+                        yAxisTitle = "Inches";
+                        series1Name = 'Snow Water Equivalent';
+                        var seriesArr = [{
+                          name: series1Name,
+                          data: numArr
+                        }];
+                      }
+                    };
+                    var tempCalc = function(){
+                      for (var q = 0; q < timeSearch + 1; q++) {
+                        dailySnowArr29.push(parseInt(data.data[q]['Air Temperature Observed (degF)']));
+                        var str = data.data[q].Date;
+                        sliceYear = str.substring(10, 8);
+                        if (str.charAt(5) === "0") {
+                          sliceMonth = str.substring(7, 6);
+                        } else {
+                          sliceMonth = str.substring(7, 5);
+                        }
+
+                        dateStr = sliceMonth + "/" + sliceYear;
+                        xAxisCat.push(dateStr);
+                        yAxisTitle = 'Degress Fahrenheit';
+                        series1Name = 'Temperature (°F)';
+                        var seriesArr = [{
+                          name: series1Name,
+                          data: numArr
+                        }];
+                      }
+                    };
+
+                    if (timeSearch === 1301) {
+                      if(dataType === "snowPack") {
+                          console.log(data.data);;
+                          snowDepthCalc();
+                          numArr = dailySnowArr29;
+                          chartType = 'column';
+                          chartTitle = '3 Year Snow Pack';
+                          series1Name = 'Snow Pack Depth (°in)';
+                          var seriesArr = [{
+                            name: series1Name,
+                            data: numArr
+                          }];
+                      }
+                      else if (dataType === "newSnow") {
+                          newSnowCalc();
+                          numArr = dailySnowArr29;
+                          chartType = 'column';
+                          chartTitle = '3 Year New Snow';
+                          series1Name = 'New Snow 24 Hours (°in)';
+                          var seriesArr = [{
+                            name: series1Name,
+                            data: numArr
+                          }];
+                      }
+                      else if (dataType === "snowWaterEquiv"){
+                        snowWaterEquivCalc();
+                        numArr = dailySnowArr29;
+                        chartType = 'column';
+                        chartTitle = '3 Year Snow Water Equivalent';
+                        series1Name = 'Snow Water Equivalent (°in)';
+                        var seriesArr = [{
+                          name: series1Name,
+                          data: numArr
+                        }];
+                      }
+                      else if (dataType === "temp") {
+                          tempCalc();
+                          numArr = dailySnowArr29;
+                          chartType = 'column';
+                          chartTitle = '3 Year Temperature';
+                          series1Name = 'Temperature (°F)';
+                          var seriesArr = [{
+                            name: series1Name,
+                            data: numArr
+                          }];
+                      }
+                    }
+                    if (timeSearch === 365) {
+                      if(dataType === "snowPack") {
+                          snowDepthCalc();
+                          numArr = dailySnowArr29;
+                          chartType = 'column';
+                          chartTitle = '365 Day Snow Pack';
+                          series1Name = 'Snow Pack Depth (°in)';
+                          var seriesArr = [{
+                            name: series1Name,
+                            data: numArr
+                          }];
+                      }
+                      else if (dataType === "newSnow") {
+                          newSnowCalc();
+                          numArr = dailySnowArr29;
+                          chartType = 'column';
+                          chartTitle = '365 Day New Snow';
+                          series1Name = 'New Snow 24 Hours (°in)';
+                          var seriesArr = [{
+                            name: series1Name,
+                            data: numArr
+                          }];
+                      }
+                      else if (dataType === "snowWaterEquiv"){
+                        snowWaterEquivCalc();
+                        numArr = dailySnowArr29;
+                        chartType = 'column';
+                        chartTitle = '365 Day Snow Water Equivalent';
+                        series1Name = 'Snow Water Equivalent (°in)';
+                        var seriesArr = [{
+                          name: series1Name,
+                          data: numArr
+                        }];
+                      }
+                      else if (dataType === "temp") {
+                          tempCalc();
+                          numArr = dailySnowArr29;
+                          chartType = 'column';
+                          chartTitle = '365 Day Temperature';
+                          series1Name = 'Temperature (°F)';
+                          var seriesArr = [{
+                            name: series1Name,
+                            data: numArr
+                          }];
+                      }
+                    }
+                    else if (timeSearch === 30) {
+                      if(dataType === "snowPack") {
+                        snowDepthCalc();
+                        numArr = dailySnowArr29;
+                        chartType = 'column';
+                        chartTitle = '30 Day Snow Pack';
+                        series1Name = 'Snow Pack Depth (°in)';
+                        var seriesArr = [{
+                          name: series1Name,
+                          data: numArr
+                        }];
+                      }
+                      else if (dataType === "newSnow") {
+                          newSnowCalc();
                           numArr = dailySnowArr29;
                           chartType = 'column';
                           chartTitle = '30 Day New Snow';
-                          series1Name = 'New Snow 24 Hours';
+                          series1Name = 'New Snow 24 Hours (°in)';
                           var seriesArr = [{
                             name: series1Name,
                             data: numArr
@@ -535,120 +657,76 @@
 
                       }
                       else if (dataType === "snowWaterEquiv"){
-                        console.log(data.data);
-                        for (var q = 0; q < timeSearch + 1; q++) {
-                          dailySnowArr29.push(parseInt(data.data[q]['Snow Water Equivalent (in)']));
-                          var str = data.data[q].Date;
-                          sliceYear = str.substring(10, 8);
-                          if (str.charAt(5) === "0") {
-                            sliceMonth = str.substring(7, 6);
-                          } else {
-                            sliceMonth = str.substring(7, 5);
-                          }
-
-                          dateStr = sliceMonth + "/" + sliceYear;
-                          xAxisCat.push(dateStr);
-                        }
+                        snowWaterEquivCalc();
                         numArr = dailySnowArr29;
                         chartType = 'column';
                         chartTitle = '30 Day Snow Water Equivalent';
-                        series1Name = 'Snow Water Equiv.';
+                        series1Name = 'Snow Water Equivuivalent (°in)';
                         var seriesArr = [{
                           name: series1Name,
                           data: numArr
                         }];
 
                       }
-
+                      else if (dataType === "temp") {
+                          tempCalc();
+                          numArr = dailySnowArr29;
+                          chartType = 'column';
+                          chartTitle = '30 Day Temperature';
+                          series1Name = 'Temperature (°F)';
+                          var seriesArr = [{
+                            name: series1Name,
+                            data: numArr
+                          }];
+                      }
                     }
                     else if (timeSearch === 7) {
                       if(dataType === "newSnow") {
-                        console.log(data.data);
-                        for (var q = 0; q < timeSearch + 1; q++) {
-                          if(parseInt(data.data[q]["Change In Snow Depth (in)"]) > 0){
-                            console.log(data.data[q]["Change In Snow Depth (in)"])
-                            dailySnowArr29.push(parseInt(data.data[q]["Change In Snow Depth (in)"]));
-                          }
-                          else {
-                            dailySnowArr29.push('0');
-                          }
-                          var str = data.data[q].Date;
-                          sliceYear = str.substring(10, 8);
-                          if (str.charAt(5) === "0") {
-                            sliceMonth = str.substring(7, 6);
-                          } else {
-                            sliceMonth = str.substring(7, 5);
-                          }
-
-                          dateStr = sliceMonth + "/" + sliceYear;
-                          xAxisCat.push(dateStr);
-                        }
+                        newSnowCalc();
                         numArr = dailySnowArr29;
                         chartType = 'column';
                         chartTitle = '7 Day New Snow';
-                        series1Name = 'New Snow 24 Hours';
+                        series1Name = 'New Snow 24 Hours (°in)';
                         var seriesArr = [{
                           name: series1Name,
                           data: numArr
                         }];
                       }
                         else if(dataType === "snowPack") {
-                          console.log(data.data);
-                          for (var q = 0; q < timeSearch + 1; q++) {
-                            dailySnowArr29.push(parseInt(data.data[q]['Snow Depth (in)']));
-                            var str = data.data[q].Date;
-                            sliceYear = str.substring(10, 8);
-                            if (str.charAt(5) === "0") {
-                              sliceMonth = str.substring(7, 6);
-                            } else {
-                              sliceMonth = str.substring(7, 5);
-                            }
-
-                            dateStr = sliceMonth + "/" + sliceYear;
-                            xAxisCat.push(dateStr);
-                          }
+                          snowDepthCalc();
                           numArr = dailySnowArr29;
                           chartType = 'column';
                           chartTitle = '7 Day Snow Pack';
-                          series1Name = 'Snow Pack Depth';
+                          series1Name = 'Snow Pack Depth (°in)';
                           var seriesArr = [{
                             name: series1Name,
                             data: numArr
                           }];
-
                         }
                         else if (dataType === "snowWaterEquiv"){
-                          console.log(data.data);
-                          for (var q = 0; q < timeSearch + 1; q++) {
-                            dailySnowArr29.push(parseInt(data.data[q]['Snow Water Equivalent (in)']));
-                            var str = data.data[q].Date;
-                            sliceYear = str.substring(10, 8);
-                            if (str.charAt(5) === "0") {
-                              sliceMonth = str.substring(7, 6);
-                            } else {
-                              sliceMonth = str.substring(7, 5);
-                            }
-
-                            dateStr = sliceMonth + "/" + sliceYear;
-                            xAxisCat.push(dateStr);
-                          }
+                          snowWaterEquivCalc();
                           numArr = dailySnowArr29;
                           chartType = 'column';
                           chartTitle = '7 Day Snow Water Equivalent';
-                          series1Name = 'Snow Water Equiv.';
+                          series1Name = 'Snow Water Equivalent (°in)';
                           var seriesArr = [{
                             name: series1Name,
                             data: numArr
                           }];
-
                         }
-
-
-
+                        else if (dataType === "temp") {
+                            tempCalc();
+                            numArr = dailySnowArr29;
+                            chartType = 'column';
+                            chartTitle = '7 Day Temperature';
+                            series1Name = 'Temperature (°F)';
+                            var seriesArr = [{
+                              name: series1Name,
+                              data: numArr
+                            }];
+                        }
                     }
-
-
-                    //annual snowfall chart
+                    //interactive search chart
                     var chartData = {
                         chart: {
                             type: chartType
@@ -664,7 +742,7 @@
                         },
                         yAxis: {
                             title: {
-                                text: 'Inches'
+                                text: yAxisTitle
                             }
                         },
                         plotOptions: {

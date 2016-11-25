@@ -46,9 +46,14 @@
     </div>
     <div class="row">
     </div>
-    <div class="row graphCenter">
+    <!-- <div class="row graphCenter">
         <div class="container col s8">
             <div id="container2" style="min-width: 200px; height: 300px;  width: 800px; margin: 0 auto"></div>
+        </div>
+    </div> -->
+    <div class="row graphCenter">
+        <div class="container col s8">
+            <div id="container" style="min-width: 200px; height: 300px;  width: 800px; margin: 0 auto"></div>
         </div>
     </div>
     <div class="container">
@@ -56,40 +61,49 @@
             <div class="col s4">
                 <form action="#">
                     <p>
-                        <input name="time" type="radio" id="week" value="WK"/>
+                        <input name="time" checked="checked" type="radio" id="week" value="WK" />
                         <label for="week">7 Days</label>
                     </p>
                     <p>
-                        <input name="time" type="radio" id="month" value="MN"/>
+                        <input name="time" type="radio" id="month" value="MN" />
                         <label for="month">30 Days</label>
                     </p>
                     <p>
-                        <input name="time" type="radio" id="year" value="YR"/>
-                        <label for="year">360 days</label>
+                        <input name="time" type="radio" id="year" value="YR" />
+                        <label for="year">1 Year</label>
+                    </p>
+                    <p>
+                        <input name="time" type="radio" id="custom" value="threeYR" />
+                        <label for="custom">3 Years</label>
                     </p>
                 </form>
             </div>
             <div class="col s4">
                 <form action="#">
                     <p>
-                        <input name="dataType" type="radio" id="snowpack" value="SP"/>
-                        <label for="snowpack">Snowpack/Temperature</label>
-                    </p>
-                    <p>
-                        <input name="dataType" type="radio" id="newSnow" value="NS"/>
+                        <input name="dataType" checked="checked" type="radio" id="newSnow" value="NS" />
                         <label for="newSnow">New Snow</label>
                     </p>
                     <p>
-                        <input name="dataType" type="radio" id="swEquiv" value="SWE"/>
+                        <input name="dataType" type="radio" id="snowpack" value="SP" />
+                        <label for="snowpack">Snowpack</label>
+                    </p>
+                    <p>
+                        <input name="dataType" type="radio" id="temp" value="TP" />
+                        <label for="temp">Temperature</label>
+                    </p>
+                    <p>
+                        <input name="dataType" type="radio" id="swEquiv" value="SWE" />
                         <label for="swEquiv">Snow Water Equivalent</label>
                     </p>
                 </form>
             </div>
         </div>
+
         <div class="row graphCenter">
-          <div class="input-field col s12">
-            <form>
-              <select id="select" name="select">
+            <div class="input-field col s12">
+                <form>
+                    <select id="select" name="select">
                 <optgroup label="Indian Peaks Wilderness">
                   <option class="statSearchx" value="564">Lake Eldora --- 9,700 ft</option>
                   <option class="statSearchx" value="838">University Camp --- 10,300 ft</option>
@@ -110,19 +124,15 @@
                   <option class="statSearchx" value="713">Red Mountain Pass --- 11,200 ft</option>
                 </optgroup>
               </select>
-              <label>Select Station to Graph</label>
-              <button class="btn waves-effect waves-light statSearch" type="submit" name="action">Submit
+                    <label>Select Station to Graph</label>
+                    <button class="btn waves-effect waves-light statSearch" type="submit" name="action">Submit
                 <i class="material-icons right">send</i>
               </button>
-            </form>
-          </div>
+                </form>
+            </div>
         </div>
     </div>
-    <div class="row graphCenter">
-        <div class="container col s8">
-            <div id="container" style="min-width: 200px; height: 300px;  width: 800px; margin: 0 auto"></div>
-        </div>
-    </div>
+
 
 
     <footer class="page-footer teal">
