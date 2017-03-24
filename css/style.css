@@ -1,12 +1,22 @@
-
 #subHead {
   margin-bottom: -10px;
 }
-
 #backPack {
   margin-right: 30px;
   padding-right: 20px;
   float: left;
+}
+#slopeMap{
+  float: right;
+  margin-top: 40px;
+}
+#caic_fx_map{
+  float: left;
+  margin-top: 40px;
+}
+#myChart {
+  width: 400px;
+  height: 400px;
 }
 .avyImg{
   height: 54px;
@@ -22,25 +32,9 @@
 .rightIcon{
   margin-left: 3px;
 }
-#slopeMap{
-  float: right;
-  margin-top: 40px;
-}
-#caic_fx_map{
-  float: left;
-  margin-top: 40px;
-}
-#myChart {
-  width: 400px;
-  height: 400px;
-}
 .mapsIcons{
   margin-top: 10px;
 }
-/*#modal1{
-  width: 1100px;
-  height: 2000px;
-}*/
 .modal{
   width: 90%;
   height: 90%;
@@ -79,37 +73,17 @@
 .graph{
   height: 100px;
 }
-.snowDepth{
-
-}
 .mapParallax{
   opacity: 0.3;
 }
 .graphCenter{
   display: flex;
-
 }
 .mapCont{
   display: flex;
   justify-content: center;
   align-items: center;
 }
-/*#finalParallax{
-  max-height: 300px;
-}*/
-nav ul a,
-nav .brand-logo {
-  color: #444;
-}
-
-p {
-  line-height: 2rem;
-}
-/*.transNav {
-  opacity: 0.6;
-  filter: alpha(opacity=60)
-}*/
-
 .button-collapse {
   color: #26a69a;
 }
@@ -129,10 +103,26 @@ p {
   height: auto;
   color: rgba(255,255,255,.9);
 }
-  .parallax-container .section {
+.parallax-container .section {
     width: 100%;
-  }
+}
+.icon-block {
+  padding: 0px;
+}
+.icon-block .material-icons {
+  font-size: inherit;
+}
+nav ul a,
+nav .brand-logo {
+  color: #444;
+}
 
+footer.page-footer {
+  margin: 0;
+}
+p {
+  line-height: 2rem;
+}
 @media only screen and (max-width : 992px) {
   .parallax-container .section {
     position: absolute;
@@ -142,20 +132,8 @@ p {
     top: 10%;
   }
 }
-
 @media only screen and (max-width : 600px) {
   #index-banner .section {
     top: 0;
   }
-}
-
-.icon-block {
-  padding: 0px;
-}
-.icon-block .material-icons {
-  font-size: inherit;
-}
-
-footer.page-footer {
-  margin: 0;
 }
