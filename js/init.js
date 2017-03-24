@@ -240,9 +240,6 @@
 
     var allRequests = [];
 
-    // This is the logic to control the warning button
-
-
     allRequests.push($.getJSON('https://g-powderlines.herokuapp.com/station/663:CO:SNTL'));
 
 
@@ -255,11 +252,12 @@
 
 
     Promise.all(allRequests).then(function(results) {
+      //Convert data from an array of nested objects into a simpler object of pertenent data.
       var dailySnowObj = {};
       for (var i = 0; i < results.length; i++) {
         dailySnowObj[results[i].station_information.name] = results[i].data;
       }
-
+      console.log(dailySnowObj);
       var dailySnowArr = [];
       dailySnowArr[0] = dailySnowObj.NIWOT[5]["Change In Snow Depth (in)"];
       dailySnowArr[1] = dailySnowObj["COPPER MOUNTAIN"][5]["Change In Snow Depth (in)"];
@@ -273,107 +271,6 @@
         }
       }
 
-      // check daily snow for red button on index page
-      //
-      // var $newSnow = $('#newSnow');
-      // if ($newSnow[0]) {
-      //     for (var b = 0; b < dailySnowNumArr.length; b++) {
-      //         if (dailySnowNumArr[b] >= 3) {
-      //             $newSnow[0].style.display = "block";
-      //             break;
-      //         }
-      //     }
-      // }
-      // var $stationSearch = $(".statSearch");
-      // var $select = $('#select');
-      // var searchVal = 322;
-      //
-      // var yearRadio = $("#year");
-      // var radioVal = "none selected";
-      // var radioVal2 = "none selected";
-      //
-      // var dailySnowArr29 = [];
-      // var xAxisCat = [];
-      // var chartType = "line";
-      // var chartTitle = "";
-      // var series1Name = "";
-      // var sliceYear = [];
-      // var sliceMonth = [];
-      // var dateStr = "";
-      // var numArr = [];
-      //
-      // var newSnowCalc = function (){
-      //   for (var q = 0; q < timeSearch + 1; q++) {
-      //     if(parseInt(data.data[q]["Change In Snow Depth (in)"]) > 0){
-      //       dailySnowArr29.push(parseInt(data.data[q]["Change In Snow Depth (in)"]));
-      //     }
-      //     else {
-      //       dailySnowArr29.push('0');
-      //     }
-      //     var str = data.data[q].Date;
-      //     sliceYear = str.substring(10, 8);
-      //     if (str.charAt(5) === "0") {
-      //       sliceMonth = str.substring(7, 6);
-      //     } else {
-      //       sliceMonth = str.substring(7, 5);
-      //     }
-      //
-      //     dateStr = sliceMonth + "/" + sliceYear;
-      //     xAxisCat.push(dateStr);
-      //   }
-      // };
-      //
-      // var $xhr = $.getJSON('https://g-powderlines.herokuapp.com/station/' + 564 + ':CO:SNTL?days=' + 7);
-      // $xhr.done(function(data) {
-      //     if ($xhr.status === 200 || $xhr.status === undefined) {
-      //       newSnowCalc();
-      //       var numArr = dailySnowArr29;
-      //       var chartType = 'column';
-      //       var chartTitle = '360 Day New Snow';
-      //       var series1Name = 'New Snow 24 Hours';
-      //       var seriesArr = [{
-      //         name: series1Name,
-      //         data: numArr
-      //       }];
-      //       var chartData2 = {
-      //         chart: {
-      //           type: chartType
-      //         },
-      //         title: {
-      //           text: chartTitle
-      //         },
-      //         subtitle: {
-      //           text: 'Powderline API'
-      //         },
-      //         xAxis: {
-      //           categories: xAxisCat
-      //         },
-      //         yAxis: {
-      //           title: {
-      //             text: 'Inches'
-      //           }
-      //         },
-      //         plotOptions: {
-      //           line: {
-      //             dataLabels: {
-      //               enabled: true
-      //             },
-      //             enableMouseTracking: true
-      //           }
-      //         },
-      //         series: seriesArr
-      //         // series: [{
-      //         //     name: series1Name,
-      //         //     data: numArr
-      //         // }, {
-      //         //     name: 'Average Temperature',
-      //         //     data: averageTempArr
-      //         // }]
-      //       };
-      //     } else {
-      //       return;
-      //     }
-      //   });
       Highcharts.chart('container', chartData2);
 
     });
@@ -742,13 +639,13 @@
               }
             },
             series: seriesArr
-              // series: [{
-              //     name: series1Name,
-              //     data: numArr
-              // }, {
-              //     name: 'Average Temperature',
-              //     data: averageTempArr
-              // }]
+            // series: [{
+            //     name: series1Name,
+            //     data: numArr
+            // }, {
+            //     name: 'Average Temperature',
+            //     data: averageTempArr
+            // }]
           };
           Highcharts.chart('container', chartData);
 
