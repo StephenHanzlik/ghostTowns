@@ -242,9 +242,7 @@
 
     allRequests.push($.getJSON('https://g-powderlines.herokuapp.com/station/663:CO:SNTL'));
 
-
     allRequests.push($.getJSON('https://g-powderlines.herokuapp.com/station/335:CO:SNTL'));
-
 
     allRequests.push($.getJSON('https://g-powderlines.herokuapp.com/station/415:CO:SNTL'));
 
